@@ -4,17 +4,19 @@
 
     <item android:drawable="?android:colorBackground" />
     <item
-        android:width="100dp"
-        android:height="25dp"
-        android:drawable="@drawable/ic_bc_app_logo"
+        android:drawable="@drawable/ic_yk_app_logo"
         android:gravity="top|center"
         android:top="64dp" />
 
     <item
-        android:drawable="@drawable/ic_bc_app_logo_with_text"
+        android:drawable="@drawable/ic_yk_app_logo_splash"
         android:gravity="center" />
 
     <item
-        android:drawable="@drawable/ic_bc_covid_19"
-        android:gravity="bottom" />
+        android:drawable="@drawable/ic_yukon_vaccination_verifier"
+        android:gravity="center"
+        android:top="100dp"
+         />
+
+
 </layer-list>

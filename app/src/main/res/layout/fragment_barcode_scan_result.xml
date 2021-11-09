@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/large"
-        android:text="@string/b_c_s_vaccine_card_verifier"
+        android:text="@string/y_k_vaccine_card_verifier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_app_logo" />
@@ -39,7 +39,7 @@
         android:layout_marginTop="@dimen/small"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_bc_logo" />
+        app:srcCompat="@mipmap/ic_yk_app_logo" />
 
     <View
         android:id="@+id/viewBlue"

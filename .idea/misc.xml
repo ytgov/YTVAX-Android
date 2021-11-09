@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/drawable/bc_splash_background.xml" value="0.14" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/drawable/ic_bc_app_logo.xml" value="0.20052083333333334" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/drawable/ic_bc_app_logo_with_text.xml" value="0.20052083333333334" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/drawable/ic_bc_covid_19.xml" value="0.20052083333333334" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/drawable/ic_logo.xml" value="0.20052083333333334" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/drawable/ic_logo__1_.xml" value="0.20052083333333334" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/drawable/ic_verifier_splash.xml" value="0.33" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/drawable/ic_yukon_vaccination_verifier.xml" value="0.20052083333333334" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/layout/fragment_barcode_scan_result.xml" value="0.2" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/layout/fragment_barcode_scanner.xml" value="0.13177083333333334" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/layout/fragment_onboarding.xml" value="0.16" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/layout/scene_fully_vaccinated.xml" value="0.1" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/layout/scene_no_record.xml" value="0.1" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/layout/scene_partially_vaccinated.xml" value="0.1" />
+        <entry key="..\:/documents/YKVAX-11-4-21/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.20052083333333334" />
+        <entry key="..\:/documents/YKVAX-11-5-21/app/src/main/res/drawable/dotted_rectangle.xml" value="0.20052083333333334" />
+        <entry key="..\:/documents/YKVAX-11-5-21/app/src/main/res/drawable/ic_flash_off.xml" value="0.1" />
+        <entry key="..\:/documents/YKVAX-11-5-21/app/src/main/res/drawable/ic_flash_on.xml" value="0.1" />
+        <entry key="..\:/documents/YKVAX-11-5-21/app/src/main/res/layout/fragment_barcode_scan_result.xml" value="0.22" />
+        <entry key="..\:/documents/YKVAX-11-5-21/app/src/main/res/layout/fragment_barcode_scanner.xml" value="0.1" />
+        <entry key="..\:/documents/YKVAX-11-5-21/app/src/main/res/layout/fragment_onboarding.xml" value="0.16" />
+        <entry key="..\:/documents/YKVAX-11-5-21/app/src/main/res/layout/scene_fully_vaccinated.xml" value="0.1" />
+        <entry key="..\:/documents/YKVAX-11-5-21/app/src/main/res/layout/scene_no_record.xml" value="0.25" />
+        <entry key="..\:/documents/YKVAX-11-5-21/app/src/main/res/layout/scene_partially_vaccinated.xml" value="0.18" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_bc_app_logo.xml" value="0.159375" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_bc_app_logo_with_text.xml" value="0.159375" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_bc_covid_19.xml" value="0.159375" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_bc_logo.xml" value="0.159375" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/activity_main.xml" value="0.14322916666666666" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/fragment_barcode_scan_result.xml" value="0.1" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/scene_fully_vaccinated.xml" value="0.17" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
