@@ -1,6 +1,7 @@
 package ca.bc.gov.shcdecoder
 
 import android.content.Context
+import android.util.Log
 import ca.bc.gov.shcdecoder.model.Jwks
 import ca.bc.gov.shcdecoder.model.Rule
 import ca.bc.gov.shcdecoder.model.TrustedIssuersResponse
@@ -41,6 +42,7 @@ class FileUtils(
     private suspend fun downloadAndCacheFiles() {
 
         if (isIntervalPassed()) {
+            Log.i("deleted","===")
             deleteCachedFiles()
         }
 
@@ -213,12 +215,11 @@ class FileUtils(
     }
 
     private suspend fun isIntervalPassed(): Boolean {
-
         val currentTime = Calendar.getInstance()
         val timeInMillis = preferenceRepository.cachedTimeStamp.first()
         val previousTime = Calendar.getInstance()
         previousTime.timeInMillis = timeInMillis
-        previousTime.add(Calendar.HOUR_OF_DAY, 6)
+        previousTime.add(Calendar.MINUTE, 1)
         return (currentTime >= previousTime)
     }
 }
