@@ -26,25 +26,32 @@ android {
 
         dev {
             dimension "version"
-//            resValue "string", "issuer_url", "https://phsasmarthealthcard-dev.azurewebsites.net/v1/trusted/.well-known/issuers.json"
-//            resValue "string", "rules_url", "https://ds9mwekyyprcy.cloudfront.net/rules.json"
-
-            resValue "string", "issuer_url", "https://pvc.service.yukon.ca/test/v1/verifier/.well-known/issuers.json"
-            resValue "string", "rules_url", "https://pvc.service.yukon.ca/test/v1/verifier/.well-known/rules.json"
-
-
+            resValue "string", "issuer_url", "https://phsasmarthealthcard-dev.azurewebsites.net/v1/trusted/.well-known/issuers.json"
+            resValue "string", "rules_url", "https://ds9mwekyyprcy.cloudfront.net/rules.json"
         }
 
         stage {
             dimension "version"
-            resValue "string", "issuer_url", "https://phsasmarthealthcard-dev.azurewebsites.net/v1/trusted/.well-known/issuers.json"
-            resValue "string", "rules_url", "https://phsasmarthealthcard-dev.azurewebsites.net/v1/Covid19Proof/.well-known/rules.json"
+//            resValue "string", "issuer_url", "https://phsasmarthealthcard-dev.azurewebsites.net/v1/trusted/.well-known/issuers.json"
+//            resValue "string", "rules_url", "https://phsasmarthealthcard-dev.azurewebsites.net/v1/Covid19Proof/.well-known/rules.json"
+//
+            resValue "string", "issuer_url", "https://pvc.service.yukon.ca/test/v1/verifier/.well-known/issuers.json"
+            resValue "string", "rules_url", "https://pvc.service.yukon.ca/test/v1/verifier/.well-known/rules.json"
+
+
+
         }
 
         prod {
             dimension "version"
-            resValue "string", "issuer_url", "https://smarthealthcard.phsa.ca/v1/trusted/.well-known/issuers.json"
-            resValue "string", "rules_url", "https://smarthealthcard.phsa.ca/v1/Covid19Proof/.well-known/rules.json"
+//            resValue "string", "issuer_url", "https://smarthealthcard.phsa.ca/v1/trusted/.well-known/issuers.json"
+//            resValue "string", "rules_url", "https://smarthealthcard.phsa.ca/v1/Covid19Proof/.well-known/rules.json"
+            resValue "string", "issuer_url", "https://pvc.service.yukon.ca/v1/verifier/.well-known/issuers.json"
+            resValue "string", "rules_url", "https://pvc.service.yukon.ca/v1/verifier/.well-known/rules.json"
+
+
+
+
         }
     }
     compileOptions {
