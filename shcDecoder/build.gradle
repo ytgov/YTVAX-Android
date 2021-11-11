@@ -32,26 +32,14 @@ android {
 
         stage {
             dimension "version"
-//            resValue "string", "issuer_url", "https://phsasmarthealthcard-dev.azurewebsites.net/v1/trusted/.well-known/issuers.json"
-//            resValue "string", "rules_url", "https://phsasmarthealthcard-dev.azurewebsites.net/v1/Covid19Proof/.well-known/rules.json"
-//
             resValue "string", "issuer_url", "https://pvc.service.yukon.ca/test/v1/verifier/.well-known/issuers.json"
             resValue "string", "rules_url", "https://pvc.service.yukon.ca/test/v1/verifier/.well-known/rules.json"
-
-
-
         }
 
         prod {
             dimension "version"
-//            resValue "string", "issuer_url", "https://smarthealthcard.phsa.ca/v1/trusted/.well-known/issuers.json"
-//            resValue "string", "rules_url", "https://smarthealthcard.phsa.ca/v1/Covid19Proof/.well-known/rules.json"
             resValue "string", "issuer_url", "https://pvc.service.yukon.ca/v1/verifier/.well-known/issuers.json"
             resValue "string", "rules_url", "https://pvc.service.yukon.ca/v1/verifier/.well-known/rules.json"
-
-
-
-
         }
     }
     compileOptions {
@@ -97,7 +85,7 @@ task sourceJar(type: Jar) {
 }
 
 def localProperties = new Properties()
-if(project.file("local.properties").exists()){
+if (project.file("local.properties").exists()) {
     localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 }
 
@@ -105,7 +93,7 @@ afterEvaluate {
     publishing {
         publications {
 
-            devRelease(MavenPublication){
+            devRelease(MavenPublication) {
 
                 groupId = 'ca.bc.gov'
                 artifactId = 'shcdecoder-dev'
@@ -134,7 +122,7 @@ afterEvaluate {
                 }
             }
 
-            stageRelease(MavenPublication){
+            stageRelease(MavenPublication) {
 
                 groupId = 'ca.bc.gov'
                 artifactId = 'shcdecoder-stage'

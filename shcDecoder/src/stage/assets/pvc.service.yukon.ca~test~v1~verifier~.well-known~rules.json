@@ -1,12 +1,12 @@
 {
-  "publishDateTime": "2021-11-04T15:43:12+0000",
+  "publishDateTime": "2021-11-10T18:53:25+0000",
   "ruleSet": [
     {
       "mixTypesAllowed": true,
       "mixTypesRuRequired": 3,
       "ruRequired": 3,
       "intervalRequired": true,
-      "daysSinceLastInterval": 14,
+      "daysSinceLastInterval": 1,
       "ruleTarget": "https://pvc.service.yukon.ca/test/v1/verifier/.well-known/issuers.json",
       "version": "V1",
       "vaccinationRules": [
