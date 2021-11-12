@@ -219,7 +219,7 @@ class FileUtils(
         val timeInMillis = preferenceRepository.cachedTimeStamp.first()
         val previousTime = Calendar.getInstance()
         previousTime.timeInMillis = timeInMillis
-        previousTime.add(Calendar.MINUTE, 1)
+        previousTime.add(Calendar.HOUR, 6)
         return (currentTime >= previousTime)
     }
 }
