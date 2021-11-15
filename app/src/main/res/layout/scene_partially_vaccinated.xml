@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/status_blue">
+    android:background="@color/status_yellow">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -44,6 +44,7 @@
                 android:layout_marginEnd="@dimen/medium"
                 android:text="@string/partially_vaccinated"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -56,8 +57,9 @@
                 android:layout_marginStart="@dimen/medium"
                 android:layout_marginTop="@dimen/medium"
                 android:layout_marginEnd="@dimen/medium"
-                android:text="@string/british_columbia_official_result"
+                android:text="@string/yukon_official_result"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_status" />
@@ -66,7 +68,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonScanNext"
                 style="?materialButtonOutlinedStyle"
-                android:layout_width="250dp"
+                android:layout_width="200dp"
                 android:layout_height="52dp"
                 android:layout_marginTop="@dimen/xxl"
                 android:layout_marginBottom="@dimen/medium"

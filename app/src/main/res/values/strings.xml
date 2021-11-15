@@ -1,27 +1,31 @@
 <resources>
     <string name="app_name">Yukon Vaccination Verifier</string>
-    <string name="b_c_s_vaccine_card_verifier">Yukon Vaccination Verifier</string>
-    <string name="british_columbia_official_result">Yukon official result</string>
+    <string name="y_k_vaccine_card_verifier">Yukon Vaccination Verifier</string>
+    <string name="yukon_official_result">Official Government of Yukon result</string>
     <string name="no_record_found">No Record Found</string>
     <string name="invalid_qr_code">Invalid QR Code</string>
     <string name="partially_vaccinated">PARTIALLY\nVACCINATED</string>
-    <string name="vaccinated">VACCINATED</string>
+    <string name="vaccinated">Fully immunized</string>
     <string name="scan_next">Scan Next</string>
+    <string name="start_scanning">Start scanning</string>
+    <string name="text_ok">OK</string>
+
+    <string name="business_can_scan_message">Businesses can scan official Government of Yukon digital or paper immunization credentials</string>
+
+    <string name="yk_camera_permission_title">Allow Camera Access</string>
+    <string name="yk_camera_permission_message">We need permission to access your camera to be able to scan an official proof of vaccination.</string>
+    <string name="yk_btn_allow_camera_access">Allow access</string>
 
 
-    <string name="bc_camera_permission_title">Allow Camera Access</string>
-    <string name="bc_camera_permission_message">We need permission to access your camera to be able to scan an official proof of vaccination.</string>
-    <string name="bc_btn_allow_camera_access">Allow access</string>
+    <string name="yk_invalid_barcode_title">Invalid QR Code</string>
+    <string name="yk_invalid_barcode_message">Please scan an official Government of Yukon vaccination QR code.</string>
 
-    <string name="bc_invalid_barcode_title">Invalid QR Code</string>
-    <string name="bc_invalid_barcode_message">Please scan an official proof of vaccination.</string>
-
-    <string name="bc_permission_required_title">Oops!</string>
-    <string name="bc_permission_message">This app requires camera permission. This permission is required in order to scan an official proof of vaccination.\nTo enable camera access go to settings to grant permissions.</string>
+    <string name="yk_permission_required_title">Oops!</string>
+    <string name="yk_permission_message">This app requires camera permission. This permission is required in order to scan an official proof of vaccination.\nTo enable camera access go to settings to grant permissions.</string>
     <string name="exit">Exit</string>
 
-    <string name="bc_no_rear_camera_title">Oops!</string>
-    <string name="bc_nor_rear_camera_message">Oops, It seems your device does not have a rear camera\nWe do not support scanning an official proof of vaccination using the front camera at the moment.</string>
+    <string name="yk_no_rear_camera_title">Oops!</string>
+    <string name="yk_nor_rear_camera_message">Oops, It seems your device does not have a rear camera\nWe do not support scanning an official proof of vaccination using the front camera at the moment.</string>
 
     <string name="btn_privacy_policy">Privacy Policy</string>
 

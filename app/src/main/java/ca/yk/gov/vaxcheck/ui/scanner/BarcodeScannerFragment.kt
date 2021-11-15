@@ -188,9 +188,9 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
 
     private fun showRationalDialog() {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.bc_permission_required_title))
+            .setTitle(getString(R.string.yk_permission_required_title))
             .setCancelable(false)
-            .setMessage(getString(R.string.bc_permission_message))
+            .setMessage(getString(R.string.yk_permission_message))
             .setNegativeButton(getString(R.string.exit)) { dialog, which ->
                 if (!findNavController().popBackStack() || !findNavController().navigateUp()) {
                     requireActivity().finish()
@@ -254,9 +254,9 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
 
         private fun showNoCameraAlertDialog() {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle(getString(R.string.bc_no_rear_camera_title))
+                .setTitle(getString(R.string.yk_no_rear_camera_title))
                 .setCancelable(false)
-                .setMessage(getString(R.string.bc_nor_rear_camera_message))
+                .setMessage(getString(R.string.yk_nor_rear_camera_message))
                 .setNegativeButton(getString(R.string.exit)) { dialog, which ->
                     if (!findNavController().popBackStack() || !findNavController().navigateUp()) {
                         requireActivity().finish()
@@ -303,10 +303,10 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
             imageAnalysis.clearAnalyzer()
 
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle(getString(R.string.bc_invalid_barcode_title))
+                .setTitle(getString(R.string.yk_invalid_barcode_title))
                 .setCancelable(false)
-                .setMessage(getString(R.string.bc_invalid_barcode_message))
-                .setPositiveButton(getString(R.string.scan_next)) { dialog, which ->
+                .setMessage(getString(R.string.yk_invalid_barcode_message))
+                .setPositiveButton(getString(R.string.text_ok)) { dialog, which ->
 
                     // Attach analyzer again to start analysis.
                     imageAnalysis.setAnalyzer(cameraExecutor, BarcodeAnalyzer(this))

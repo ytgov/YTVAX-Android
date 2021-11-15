@@ -27,6 +27,11 @@ buildscript {
     }
 }
 
+def localProperties = new Properties()
+if(project.file("local.properties").exists()){
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+}
+
 allprojects {
     repositories {
         google()
@@ -35,8 +40,8 @@ allprojects {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/FreshworksStudio/BCVAX-Android")
             credentials {
-                username = project.findProperty('USER') ?: System.getenv("USER")
-                password = project.findProperty('TOKEN') ?: System.getenv("TOKEN")
+                username = localProperties['USER'] ?: System.getenv("USER")
+                password = localProperties['TOKEN'] ?: System.getenv("TOKEN")
             }
         }
         jcenter()

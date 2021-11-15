@@ -21,7 +21,6 @@ class BarcodeAnalyzer(private val listener: ScanningResultListener) : ImageAnaly
         val mediaImage = imageProxy.image
         if (mediaImage != null && !isScanning) {
             val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
-
             val scanner = BarcodeScanning.getClient()
 
             isScanning = true
@@ -43,6 +42,7 @@ class BarcodeAnalyzer(private val listener: ScanningResultListener) : ImageAnaly
                     isScanning = false
                 }
                 .addOnFailureListener {
+                    it.printStackTrace()
                     listener.onFailure()
                     isScanning = false
                 }
