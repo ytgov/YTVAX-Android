@@ -1,0 +1,64 @@
+{
+  "participating_issuers": [
+    {
+      "iss": "https://pvc.service.yukon.ca/issuer",
+      "name": "Government of Yukon"
+    },
+    {
+      "iss": "https://www.hss.gov.nt.ca/covax",
+      "name": "Northwest Territories"
+    },
+    {
+      "iss": "https://pvc.gov.nu.ca/pvc",
+      "name": "Nunavut"
+    },
+    {
+      "iss": "https://smarthealthcard.phsa.ca/v1/issuer",
+      "name": "British Columbia"
+    },
+    {
+      "iss": "https://covidrecords.alberta.ca/smarthealth/issuer",
+      "name": "Alberta"
+    },
+    {
+      "iss": "https://commons.ehealthsask.ca",
+      "name": "Saskatchewan"
+    },
+    {
+      "iss": "https://skphr.prd.telushealthspace.com",
+      "name": "Saskatchewan MySaskHealthRecord"
+    },
+    {
+      "iss": "https://immunizationcard.manitoba.ca/api/national",
+      "name": "Manitoba"
+    },
+    {
+      "iss": "https://prd.pkey.dhdp.ontariohealth.ca",
+      "name": "Ontario"
+    },
+    {
+      "iss": "https://covid19.quebec.ca/PreuveVaccinaleApi/issuer",
+      "name": "Quebec"
+    },
+    {
+      "iss": "https://www.gnb.ca/smarthealth",
+      "name": "New Brunswick"
+    },
+    {
+      "iss": "https://pvcprod.gov.pe.ca",
+      "name": "Prince Edward Island"
+    },
+    {
+      "iss": "https://pvc.novascotia.ca/issuer",
+      "name": "Nova Scotia"
+    },
+    {
+      "iss": "https://www.gov.nl.ca/covid-19/life-during-covid-19/vaccination-record/prod",
+      "name": "Newfoundland and Labrador"
+    },
+    {
+      "iss": "https://pvc.cloud.forces.gc.ca",
+      "name": "Canadian Armed Forces"
+    }
+  ]
+}

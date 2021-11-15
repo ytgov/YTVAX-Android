@@ -14,8 +14,8 @@ android {
         applicationId "ca.yk.gov.vaxcheck"
         minSdk 27
         targetSdk 31
-        versionCode 1
-        versionName "0.0.1"
+        versionCode 3
+        versionName "0.0.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -94,11 +94,11 @@ dependencies {
 
     //Dagger Hilt
     implementation "com.google.dagger:hilt-android:$versions.hilt"
-//    implementation project(path: ':shcDecoder')
+    implementation project(path: ':shcDecoder')
 
-    devImplementation "ca.bc.gov:shcdecoder-dev:$versions.shcdecoder"
-    stageImplementation "ca.bc.gov:shcdecoder-stage:$versions.shcdecoder"
-    prodImplementation "ca.bc.gov:shcdecoder:$versions.shcdecoder"
+//    devImplementation "ca.bc.gov:shcdecoder-dev:$versions.shcdecoder"
+//    stageImplementation "ca.bc.gov:shcdecoder-stage:$versions.shcdecoder"
+//    prodImplementation "ca.bc.gov:shcdecoder:$versions.shcdecoder"
 
     kapt "com.google.dagger:hilt-compiler:$versions.hilt"
 

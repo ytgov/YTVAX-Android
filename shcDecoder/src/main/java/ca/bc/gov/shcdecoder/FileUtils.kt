@@ -1,6 +1,7 @@
 package ca.bc.gov.shcdecoder
 
 import android.content.Context
+import android.util.Log
 import ca.bc.gov.shcdecoder.model.Jwks
 import ca.bc.gov.shcdecoder.model.Rule
 import ca.bc.gov.shcdecoder.model.TrustedIssuersResponse
@@ -41,6 +42,7 @@ class FileUtils(
     private suspend fun downloadAndCacheFiles() {
 
         if (isIntervalPassed()) {
+            Log.i("deleted","===")
             deleteCachedFiles()
         }
 
@@ -51,7 +53,11 @@ class FileUtils(
         val file = getFile(url)
 
         if (!file.exists()) {
-            downloadFile(url)
+            try {
+                downloadFile(url)
+            } catch (e: Exception) {
+
+            }
         }
 
         val trustedIssuersResponse = getTrustedIssuers(file)
@@ -65,7 +71,10 @@ class FileUtils(
             }
             val issuerKeyFile = getFile(keyUrl)
             if (!issuerKeyFile.exists()) {
-                downloadFile(keyUrl)
+                try {
+                    downloadFile(keyUrl)
+                } catch (e: Exception) {
+                }
             }
         }
 
@@ -74,7 +83,10 @@ class FileUtils(
         val rulesFile = getFile(rulesUrl)
 
         if (!rulesFile.exists()) {
-            downloadFile(rulesUrl)
+            try {
+                downloadFile(rulesUrl)
+            } catch (e: Exception) {
+            }
         }
 
 
@@ -203,12 +215,11 @@ class FileUtils(
     }
 
     private suspend fun isIntervalPassed(): Boolean {
-
         val currentTime = Calendar.getInstance()
         val timeInMillis = preferenceRepository.cachedTimeStamp.first()
         val previousTime = Calendar.getInstance()
         previousTime.timeInMillis = timeInMillis
-        previousTime.add(Calendar.HOUR_OF_DAY, 24)
+        previousTime.add(Calendar.HOUR, 6)
         return (currentTime >= previousTime)
     }
 }
