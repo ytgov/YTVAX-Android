@@ -79,6 +79,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rb_english"
             style="?radioButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,6 +87,7 @@
             android:text="@string/yk_text_english" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rb_french"
             style="?radioButtonStyle"
             android:layout_marginTop="@dimen/medium"
             android:layout_width="wrap_content"
