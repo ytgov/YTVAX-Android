@@ -27,6 +27,12 @@ class SharedViewModel @Inject constructor(
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = null
     )
+    val getSelectedLanguage = dataStoreRepo.getSelectedLanguage.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = null
+    )
+
     private val _status: MutableLiveData<ImmunizationRecord> = MutableLiveData()
     val status: LiveData<ImmunizationRecord>
         get() = _status
@@ -38,4 +44,9 @@ class SharedViewModel @Inject constructor(
     fun setOnBoardingShown(shown: Boolean) = viewModelScope.launch {
         dataStoreRepo.setOnBoardingShown(shown)
     }
+
+    fun setSelectLanguage(languageCode: String) = viewModelScope.launch {
+        dataStoreRepo.setSelectedLanguage(languageCode)
+    }
+
 }
