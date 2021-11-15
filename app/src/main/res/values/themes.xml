@@ -48,6 +48,9 @@
         <item name="textAppearanceBody1">@style/YK_VAX.TextAppearance.MaterialComponents.Body1
         </item>
 
+        <item name="textAppearanceBody2">@style/YK_VAX.TextAppearance.MaterialComponents.Body2
+        </item>
+
         <item name="textAppearanceButton">@style/YK_VAX.TextAppearance.MaterialComponents.Button
         </item>
 
@@ -55,6 +58,10 @@
         <item name="materialButtonStyle">@style/YK_VAX.Widget.MaterialComponents.Button</item>
         <item name="materialButtonOutlinedStyle">
             @style/YK_VAX.Widget.MaterialComponents.Button.OutlinedButton
+        </item>
+
+        <item name="radioButtonStyle">
+            @style/YK_VAX.Widget.MaterialComponents.Radio.OutlinedRadio
         </item>
 
     </style>
