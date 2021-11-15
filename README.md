@@ -1,6 +1,6 @@
 # Yukon Vaccination Verifier-Android
 
-#### Yukon Vaccination Verifier App is used to scan the QR generated from HealthGateway app and shows the vaccination status of a person. This is for Businesses from the province of British Columbia.
+#### Yukon Vaccination Verifier App is used to scan the QR generated from HealthGateway app and shows the vaccination status of a person. This is for Businesses from the province of Yukon.
 
 ## Table of Contents
 

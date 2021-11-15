@@ -79,12 +79,7 @@ class MainActivity : AppCompatActivity() {
                 == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
             ) {
 
-                appUpdateManager.startUpdateFlowForResult(
-                    appUpdateInfo,
-                    IMMEDIATE,
-                    this,
-                    REQUEST_CODE_FLEXIBLE_UPDATE
-                )
+                startForInAppUpdate(appUpdateInfo)
             }
 
             if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {

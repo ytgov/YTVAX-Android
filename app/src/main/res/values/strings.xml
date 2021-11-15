@@ -10,7 +10,7 @@
     <string name="start_scanning">Start scanning</string>
     <string name="text_ok">OK</string>
 
-    <string name="business_can_scan_message">Businesses can scan official Government of Yukon digital or paper immunization credentials</string>
+    <string name="business_can_scan_message">Use this service to scan an official government-issued QR code</string>
 
     <string name="yk_camera_permission_title">Allow Camera Access</string>
     <string name="yk_camera_permission_message">We need permission to access your camera to be able to scan an official proof of vaccination.</string>
@@ -18,7 +18,7 @@
 
 
     <string name="yk_invalid_barcode_title">Invalid QR Code</string>
-    <string name="yk_invalid_barcode_message">Please scan an official Government of Yukon vaccination QR code.</string>
+    <string name="yk_invalid_barcode_message">Please scan an official government-issued QR code.</string>
 
     <string name="yk_permission_required_title">Oops!</string>
     <string name="yk_permission_message">This app requires camera permission. This permission is required in order to scan an official proof of vaccination.\nTo enable camera access go to settings to grant permissions.</string>
@@ -27,7 +27,7 @@
     <string name="yk_no_rear_camera_title">Oops!</string>
     <string name="yk_nor_rear_camera_message">Oops, It seems your device does not have a rear camera\nWe do not support scanning an official proof of vaccination using the front camera at the moment.</string>
 
-    <string name="btn_privacy_policy">Privacy Policy</string>
+    <string name="btn_privacy_policy">Privacy policy</string>
 
     <string name="no_app_found">No app found to open link!</string>
 
