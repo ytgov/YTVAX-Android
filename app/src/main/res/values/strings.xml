@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Yukon Vaccination Verifier</string>
     <string name="y_k_vaccine_card_verifier">Yukon Vaccination Verifier</string>
+    <string name="yk_vaccine_verifier">Vaccination Verifier</string>
+
     <string name="yukon_official_result">Official Government of Yukon result</string>
     <string name="no_record_found">No Record Found</string>
     <string name="invalid_qr_code">Invalid QR Code</string>
@@ -33,4 +35,10 @@
 
     <string name="in_app_update_message">Newer version is ready to install.</string>
     <string name="update">Update</string>
+    <string name="yk_select_a_language">Select a language</string>
+    <string name="yk_selectionnez_une_langue">Sélectionnez une langue</string>
+    <string name="yk_text_english">English</string>
+    <string name="yk_text_french">Français</string>
+
+
 </resources>

@@ -35,6 +35,14 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+
+    <style name="YK_VAX.TextAppearance.MaterialComponents.Body2" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/yk_montserrat_regular</item>
+        <item name="android:textColor">@android:color/primary_text_dark</item>
+    </style>
+
+
     <!--Button Font style-->
     <style name="YK_VAX.TextAppearance.MaterialComponents.Button" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:textSize">14sp</item>
