@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import ca.yk.gov.vaxcheck.MainActivity
 import ca.yk.gov.vaxcheck.R
+import ca.yk.gov.vaxcheck.SplashActivity
 import ca.yk.gov.vaxcheck.databinding.FragmentSelectLanguageBinding
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.LANGUAGE_CODE_EN
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.LANGUAGE_CODE_FR
@@ -50,7 +51,7 @@ class SelectLanguageFragment : Fragment(R.layout.fragment_select_language) {
 
    private fun reCreate() {
        lifecycleScope.launch {
-           startActivity(Intent(requireContext(), MainActivity::class.java))
+           startActivity(Intent(requireContext(), SplashActivity::class.java))
            requireActivity().finish()
         }
    }
