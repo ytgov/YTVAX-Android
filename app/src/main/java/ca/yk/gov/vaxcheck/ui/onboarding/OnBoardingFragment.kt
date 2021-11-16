@@ -1,5 +1,6 @@
 package ca.yk.gov.vaxcheck.ui.onboarding
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,6 +14,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import ca.yk.gov.vaxcheck.R
 import ca.yk.gov.vaxcheck.databinding.FragmentOnboardingBinding
+import ca.yk.gov.vaxcheck.utils.changeLocale
 import ca.yk.gov.vaxcheck.utils.setSpannableLink
 import ca.yk.gov.vaxcheck.utils.toast
 import ca.yk.gov.vaxcheck.utils.viewBindings
@@ -32,6 +34,7 @@ class OnBoardingFragment : Fragment(R.layout.fragment_onboarding) {
     private val binding by viewBindings(FragmentOnboardingBinding::bind)
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

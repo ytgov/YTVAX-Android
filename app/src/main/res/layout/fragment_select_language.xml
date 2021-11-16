@@ -33,7 +33,7 @@
         android:id="@+id/iv_splash_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/xl"
+        android:layout_marginTop="@dimen/xxl"
         android:src="@drawable/ic_yk_app_logo_splash"
         app:layout_constraintBottom_toTopOf="@+id/txt_yk_select_language"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +70,7 @@
     <RadioGroup
         android:id="@+id/radio_group_language"
         android:gravity="center"
-        android:layout_marginTop="@dimen/medium"
+        android:layout_marginTop="@dimen/xxl"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +89,7 @@
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/rb_french"
             style="?radioButtonStyle"
-            android:layout_marginTop="@dimen/medium"
+            android:layout_marginTop="@dimen/large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layoutDirection="rtl"

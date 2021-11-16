@@ -1,8 +1,16 @@
 package ca.yk.gov.vaxcheck
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import ca.yk.gov.vaxcheck.utils.changeLocale
+
+import ca.yk.gov.vaxcheck.viewmodel.SharedViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -13,6 +21,13 @@ import com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import java.util.*
+
+
+
+
 
 /**
  * [MainActivity]
@@ -21,10 +36,10 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
     private lateinit var appUpdateManager: AppUpdateManager
-
     private lateinit var appUpdateInfo: AppUpdateInfo
+    private val sharedViewModel: SharedViewModel by viewModels()
+
 
     companion object {
         const val REQUEST_CODE_FLEXIBLE_UPDATE = 1001
@@ -36,8 +51,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+    override fun attachBaseContext(context: Context) {
+        super.attachBaseContext(context.changeLocale("fr"))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        lifecycleScope.launch {
+            sharedViewModel.getSelectedLanguage.collect {
+                Log.i("Locale",it)
+            }
+        }
+
         setContentView(R.layout.activity_main)
 
         appUpdateManager = AppUpdateManagerFactory.create(this)
@@ -98,6 +124,9 @@ class MainActivity : AppCompatActivity() {
             updateInfo, AppUpdateType.FLEXIBLE, this, REQUEST_CODE_FLEXIBLE_UPDATE
         )
     }
+
+
+
 
     private fun popupSnackBarForCompleteUpdate() {
         Snackbar.make(
