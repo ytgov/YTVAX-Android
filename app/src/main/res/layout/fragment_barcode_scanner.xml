@@ -35,7 +35,12 @@
             android:id="@+id/sw_locale"
             android:layout_marginStart="@dimen/small"
             android:layout_width="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            app:trackTint="@color/grey"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:theme="@style/Theme.YK_VAX.Switch"
+            app:layout_constraintTop_toTopOf="@id/tv_en"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_en"
             app:layout_constraintStart_toEndOf="@+id/tv_en"
             android:layout_height="wrap_content"/>
 
