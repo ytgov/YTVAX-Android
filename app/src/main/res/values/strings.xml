@@ -39,6 +39,9 @@
     <string name="yk_selectionnez_une_langue">Sélectionnez une langue</string>
     <string name="yk_text_english">English</string>
     <string name="yk_text_french">Français</string>
+    <string name="yk_text_en">En</string>
+    <string name="tv_fr">Fr</string>
+    <string name="btn_covid_info">COVID-19 information</string>
 
 
 </resources>

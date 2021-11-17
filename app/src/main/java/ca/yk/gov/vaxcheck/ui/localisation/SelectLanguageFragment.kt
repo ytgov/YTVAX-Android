@@ -7,7 +7,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import ca.yk.gov.vaxcheck.MainActivity
 import ca.yk.gov.vaxcheck.R
 import ca.yk.gov.vaxcheck.SplashActivity
 import ca.yk.gov.vaxcheck.databinding.FragmentSelectLanguageBinding
@@ -16,7 +15,6 @@ import ca.yk.gov.vaxcheck.utils.LanguageConstants.LANGUAGE_CODE_FR
 import ca.yk.gov.vaxcheck.utils.viewBindings
 import ca.yk.gov.vaxcheck.viewmodel.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
