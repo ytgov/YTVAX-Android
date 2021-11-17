@@ -43,7 +43,7 @@
         <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/yk_splash_background.xml" value="0.25125" />
         <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/activity_main.xml" value="0.14322916666666666" />
         <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/fragment_barcode_scan_result.xml" value="0.1" />
-        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/fragment_barcode_scanner.xml" value="0.12" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/fragment_barcode_scanner.xml" value="0.33" />
         <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/fragment_onboarding.xml" value="0.14175724637681159" />
         <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/fragment_select_language.xml" value="0.12" />
         <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/scene_fully_vaccinated.xml" value="0.33" />

@@ -66,4 +66,9 @@
 
     </style>
 
+
+    <style name="Theme.YK_VAX.Switch" parent="Theme.YK_VAX">
+        <item name="colorAccent">#fafafa</item>
+    </style>
+
 </resources>
