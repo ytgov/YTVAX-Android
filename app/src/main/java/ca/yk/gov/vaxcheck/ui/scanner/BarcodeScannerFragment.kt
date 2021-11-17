@@ -28,11 +28,13 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import ca.bc.gov.shcdecoder.model.ImmunizationStatus
 import ca.yk.gov.vaxcheck.R
+import ca.yk.gov.vaxcheck.SplashActivity
 import ca.yk.gov.vaxcheck.barcodeanalyzer.BarcodeAnalyzer
 import ca.yk.gov.vaxcheck.barcodeanalyzer.ScanningResultListener
 import ca.yk.gov.vaxcheck.databinding.FragmentBarcodeScannerBinding
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.LANGUAGE_CODE_EN
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.LANGUAGE_CODE_FR
+import ca.yk.gov.vaxcheck.utils.LanguageConstants.getLocale
 import ca.yk.gov.vaxcheck.utils.setSpannableLink
 import ca.yk.gov.vaxcheck.utils.toast
 import ca.yk.gov.vaxcheck.utils.viewBindings
@@ -99,13 +101,26 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
             }
         }
 
+
+        binding.swLocale.isChecked = getLocale() == LANGUAGE_CODE_FR
+        binding.swLocale.setOnCheckedChangeListener { _, isChecked ->
+            if (!isChecked) sharedViewModel.setSelectLanguage(LANGUAGE_CODE_EN)
+            else sharedViewModel.setSelectLanguage(LANGUAGE_CODE_FR)
+            reCreate()
+        }
+
+
+        binding.txtCovidInfo.setSpannableLink {
+            showPrivacyPolicy(getString(R.string.url_covid_info).replace(LANGUAGE_CODE_EN, getLocale()))
+        }
+
         binding.txtPrivacyPolicy.setSpannableLink {
-            showPrivacyPolicy()
+            showPrivacyPolicy(getString(R.string.url_privacy_policy).replace(LANGUAGE_CODE_EN, getLocale()))
         }
     }
 
-    private fun showPrivacyPolicy() {
-        val webpage: Uri = Uri.parse(getString(R.string.url_privacy_policy))
+    private fun showPrivacyPolicy(link: String) {
+        val webpage: Uri = Uri.parse(link)
         val intent = Intent(Intent.ACTION_VIEW, webpage)
         try {
             startActivity(intent)
@@ -138,6 +153,13 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
         }
     }
 
+
+    private fun reCreate() {
+        lifecycleScope.launch {
+            startActivity(Intent(requireContext(), SplashActivity::class.java))
+            requireActivity().finish()
+        }
+    }
 
     private suspend fun collectSelectedLanguageFlow() {
         sharedViewModel.getSelectedLanguage.collect { code ->
