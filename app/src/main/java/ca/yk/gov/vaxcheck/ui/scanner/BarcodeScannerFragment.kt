@@ -4,18 +4,16 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.util.Size
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.Camera
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.Preview
-import androidx.camera.core.TorchState
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -42,10 +40,14 @@ import ca.yk.gov.vaxcheck.viewmodel.BarcodeScanResultViewModel
 import ca.yk.gov.vaxcheck.viewmodel.SharedViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+import androidx.browser.customtabs.CustomTabColorSchemeParams
+import ca.yk.gov.vaxcheck.utils.LanguageConstants.setLocale
+import ca.yk.gov.vaxcheck.utils.changeLocale
+
 
 /**
  * [BarcodeScannerFragment]
@@ -71,6 +73,9 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
 
     private val viewModel: BarcodeScanResultViewModel by viewModels()
 
+    private lateinit var stringContext: Context
+
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         requestPermission = registerForActivityResult(
@@ -87,6 +92,7 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        stringContext = requireContext().changeLocale(getLocale())
 
         viewLifecycleOwner.lifecycleScope.launch {
 
@@ -101,33 +107,67 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
             }
         }
 
-
+        setStrings()
         binding.swLocale.isChecked = getLocale() == LANGUAGE_CODE_FR
         binding.swLocale.setOnCheckedChangeListener { _, isChecked ->
-            if (!isChecked) sharedViewModel.setSelectLanguage(LANGUAGE_CODE_EN)
-            else sharedViewModel.setSelectLanguage(LANGUAGE_CODE_FR)
-            reCreate()
+            if (!isChecked) {
+                setLocale(LANGUAGE_CODE_EN)
+                sharedViewModel.setSelectLanguage(LANGUAGE_CODE_EN)
+                stringContext = requireContext().changeLocale(getLocale())
+            } else {
+                setLocale(LANGUAGE_CODE_FR)
+                sharedViewModel.setSelectLanguage(LANGUAGE_CODE_FR)
+                stringContext = requireContext().changeLocale(getLocale())
+            }
+            setStrings()
         }
 
-
-        binding.txtCovidInfo.setSpannableLink {
-            showPrivacyPolicy(getString(R.string.url_covid_info).replace(LANGUAGE_CODE_EN, getLocale()))
-        }
-
-        binding.txtPrivacyPolicy.setSpannableLink {
-            showPrivacyPolicy(getString(R.string.url_privacy_policy).replace(LANGUAGE_CODE_EN, getLocale()))
-        }
     }
 
-    private fun showPrivacyPolicy(link: String) {
-        val webpage: Uri = Uri.parse(link)
+    private fun showPrivacyPolicy(url: String) {
+        val webpage: Uri = Uri.parse(url)
         val intent = Intent(Intent.ACTION_VIEW, webpage)
         try {
             startActivity(intent)
         } catch (e: Exception) {
-            context?.toast(getString(R.string.no_app_found))
+            context?.toast(stringContext.getString(R.string.no_app_found))
         }
     }
+
+
+    private fun setStrings() {
+
+        binding.txtCovidInfo.setText(stringContext.getString(R.string.btn_covid_info))
+        binding.txtPrivacyPolicy.setText(stringContext.getString(R.string.btn_privacy_policy))
+
+        binding.txtCovidInfo.setSpannableLink {
+            showCovidInfo(getString(R.string.url_covid_info).replace(LANGUAGE_CODE_EN, getLocale()))
+        }
+
+        binding.txtPrivacyPolicy.setSpannableLink {
+            showPrivacyPolicy(
+                getString(R.string.url_privacy_policy).replace(
+                    LANGUAGE_CODE_EN,
+                    getLocale()
+                )
+            )
+        }
+
+    }
+
+
+    private fun showCovidInfo(url: String) {
+        val colorInt = ContextCompat.getColor(requireContext(), R.color.dark_blue)
+        val defaultColors = CustomTabColorSchemeParams.Builder()
+            .setToolbarColor(colorInt)
+            .build()
+
+        val builder = CustomTabsIntent.Builder()
+        builder.setDefaultColorSchemeParams(defaultColors)
+        val customTabsIntent = builder.build()
+        customTabsIntent.launchUrl(requireContext(), Uri.parse(url))
+    }
+
 
     private suspend fun collectOnBoardingFlow() {
         sharedViewModel.isOnBoardingShown.collect { shown ->
@@ -233,10 +273,10 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
 
     private fun showRationalDialog() {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.yk_permission_required_title))
+            .setTitle(stringContext.getString(R.string.yk_permission_required_title))
             .setCancelable(false)
-            .setMessage(getString(R.string.yk_permission_message))
-            .setNegativeButton(getString(R.string.exit)) { dialog, which ->
+            .setMessage(stringContext.getString(R.string.yk_permission_message))
+            .setNegativeButton(stringContext.getString(R.string.exit)) { dialog, which ->
                 if (!findNavController().popBackStack() || !findNavController().navigateUp()) {
                     requireActivity().finish()
                 }
@@ -299,10 +339,10 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
 
     private fun showNoCameraAlertDialog() {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.yk_no_rear_camera_title))
+            .setTitle(stringContext.getString(R.string.yk_no_rear_camera_title))
             .setCancelable(false)
-            .setMessage(getString(R.string.yk_nor_rear_camera_message))
-            .setNegativeButton(getString(R.string.exit)) { dialog, which ->
+            .setMessage(stringContext.getString(R.string.yk_nor_rear_camera_message))
+            .setNegativeButton(stringContext.getString(R.string.exit)) { dialog, which ->
                 if (!findNavController().popBackStack() || !findNavController().navigateUp()) {
                     requireActivity().finish()
                 }
@@ -348,10 +388,10 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
         imageAnalysis.clearAnalyzer()
 
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.yk_invalid_barcode_title))
+            .setTitle(stringContext.getString(R.string.yk_invalid_barcode_title))
             .setCancelable(false)
-            .setMessage(getString(R.string.yk_invalid_barcode_message))
-            .setPositiveButton(getString(R.string.text_ok)) { dialog, which ->
+            .setMessage(stringContext.getString(R.string.yk_invalid_barcode_message))
+            .setPositiveButton(stringContext.getString(R.string.text_ok)) { dialog, which ->
 
                 // Attach analyzer again to start analysis.
                 imageAnalysis.setAnalyzer(cameraExecutor, BarcodeAnalyzer(this))
