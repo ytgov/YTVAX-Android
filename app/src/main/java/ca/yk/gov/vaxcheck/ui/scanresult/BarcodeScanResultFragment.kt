@@ -1,5 +1,6 @@
 package ca.yk.gov.vaxcheck.ui.scanresult
 
+import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.transition.Scene
@@ -11,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import ca.bc.gov.shcdecoder.model.ImmunizationStatus
 import ca.yk.gov.vaxcheck.R
 import ca.yk.gov.vaxcheck.databinding.FragmentBarcodeScanResultBinding
+import ca.yk.gov.vaxcheck.utils.LanguageConstants.getLocale
+import ca.yk.gov.vaxcheck.utils.changeLocale
 import ca.yk.gov.vaxcheck.utils.viewBindings
 import ca.yk.gov.vaxcheck.viewmodel.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,8 +36,17 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
 
     private lateinit var sceneNoRecord: Scene
 
+    private lateinit var stringContext: Context
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        stringContext = requireContext().changeLocale(getLocale())
 
         sceneFullyVaccinated = Scene.getSceneForLayout(
             binding.sceneRoot,

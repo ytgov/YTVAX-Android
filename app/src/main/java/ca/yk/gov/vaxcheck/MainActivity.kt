@@ -2,6 +2,7 @@ package ca.yk.gov.vaxcheck
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.getLocale
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
     override fun attachBaseContext(context: Context) {
         super.attachBaseContext(context.changeLocale(getLocale()))
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

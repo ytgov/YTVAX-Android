@@ -7,11 +7,13 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import ca.yk.gov.vaxcheck.MainActivity
 import ca.yk.gov.vaxcheck.R
 import ca.yk.gov.vaxcheck.SplashActivity
 import ca.yk.gov.vaxcheck.databinding.FragmentSelectLanguageBinding
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.LANGUAGE_CODE_EN
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.LANGUAGE_CODE_FR
+import ca.yk.gov.vaxcheck.utils.LanguageConstants.setLocale
 import ca.yk.gov.vaxcheck.utils.viewBindings
 import ca.yk.gov.vaxcheck.viewmodel.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,19 +39,21 @@ class SelectLanguageFragment : Fragment(R.layout.fragment_select_language) {
             when (id) {
                 R.id.rb_english -> {
                     sharedViewModel.setSelectLanguage(LANGUAGE_CODE_EN)
-                    reCreate()
+                    setLocale(LANGUAGE_CODE_EN)
+                    gotoScanner()
                 }
                 R.id.rb_french -> {
                     sharedViewModel.setSelectLanguage(LANGUAGE_CODE_FR)
-                    reCreate()
+                    setLocale(LANGUAGE_CODE_FR)
+                    gotoScanner()
                 }
             }
         }
     }
 
-   private fun reCreate() {
+   private fun gotoScanner() {
+       startActivity(Intent(requireContext(), MainActivity::class.java))
        lifecycleScope.launch {
-           startActivity(Intent(requireContext(), SplashActivity::class.java))
            requireActivity().finish()
         }
    }

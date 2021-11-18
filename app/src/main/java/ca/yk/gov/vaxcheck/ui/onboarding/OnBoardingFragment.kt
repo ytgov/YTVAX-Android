@@ -36,6 +36,7 @@ class OnBoardingFragment : Fragment(R.layout.fragment_onboarding) {
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
