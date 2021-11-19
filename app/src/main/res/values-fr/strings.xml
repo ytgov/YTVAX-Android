@@ -7,7 +7,7 @@
     <string name="no_record_found">Aucun Enregistrement Trouvé</string>
     <string name="invalid_qr_code">Code QR invalide</string>
     <string name="partially_vaccinated">Partiellement\nvacciné</string>
-    <string name="vaccinated">Entièrement vacciné</string>
+    <string name="vaccinated">Entièrement\nvacciné</string>
     <string name="scan_next">Numériser ensuite</string>
     <string name="start_scanning">Lancer la numérisation</string>
     <string name="text_ok">d\'accord</string>
