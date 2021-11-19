@@ -12,6 +12,9 @@ import androidx.navigation.fragment.findNavController
 import ca.bc.gov.shcdecoder.model.ImmunizationStatus
 import ca.yk.gov.vaxcheck.R
 import ca.yk.gov.vaxcheck.databinding.FragmentBarcodeScanResultBinding
+import ca.yk.gov.vaxcheck.databinding.SceneFullyVaccinatedBinding
+import ca.yk.gov.vaxcheck.databinding.SceneNoRecordBinding
+import ca.yk.gov.vaxcheck.databinding.ScenePartiallyVaccinatedBinding
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.getLocale
 import ca.yk.gov.vaxcheck.utils.changeLocale
 import ca.yk.gov.vaxcheck.utils.viewBindings
@@ -39,10 +42,6 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
     private lateinit var stringContext: Context
 
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -65,26 +64,20 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
             if (status != null) {
                 binding.txtFullName.text = status.name
                 when (status.status) {
+
                     ImmunizationStatus.FULLY_IMMUNIZED -> {
                         sceneFullyVaccinated.enter()
-                        sceneFullyVaccinated.sceneRoot.findViewById<View>(R.id.buttonScanNext)
-                            .setOnClickListener {
-                                findNavController().popBackStack()
-                            }
+                        setFullyVaccinatedData()
                     }
+
                     ImmunizationStatus.PARTIALLY_IMMUNIZED -> {
                         scenePartiallyVaccinated.enter()
-                        scenePartiallyVaccinated.sceneRoot.findViewById<View>(R.id.buttonScanNext)
-                            .setOnClickListener {
-                                findNavController().popBackStack()
-                            }
+                        setPartialData()
                     }
+
                     ImmunizationStatus.INVALID_QR_CODE -> {
                         sceneNoRecord.enter()
-                        sceneNoRecord.sceneRoot.findViewById<View>(R.id.buttonScanNext)
-                            .setOnClickListener {
-                                findNavController().popBackStack()
-                            }
+                        setNoRecordData()
                     }
                 }
             }
@@ -102,4 +95,69 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
             countDownTimer.start()
         })
     }
+
+
+    private fun setPartialData() {
+        val scenePartiallyVaccinatedBinding =
+            ScenePartiallyVaccinatedBinding.bind(binding.root)
+
+
+        scenePartiallyVaccinatedBinding.buttonScanNext.text =
+            stringContext.getString(R.string.scan_next)
+
+        scenePartiallyVaccinatedBinding.txtStatus.text =
+            stringContext.getString(R.string.partially_vaccinated)
+
+        scenePartiallyVaccinatedBinding.txtYkOfficialResult.text =
+            stringContext.getString(R.string.yukon_official_result)
+
+
+        scenePartiallyVaccinatedBinding.buttonScanNext
+            .setOnClickListener {
+                findNavController().popBackStack()
+            }
+
+    }
+
+    private fun setNoRecordData() {
+        val sceneNoRecordBinding =
+            SceneNoRecordBinding.bind(binding.root)
+
+        sceneNoRecordBinding.buttonScanNext.text =
+            stringContext.getString(R.string.scan_next)
+
+        sceneNoRecordBinding.txtStatus.text =
+            stringContext.getString(R.string.invalid_qr_code)
+
+        sceneNoRecordBinding.buttonScanNext
+            .setOnClickListener {
+                findNavController().popBackStack()
+            }
+
+    }
+
+
+    private fun setFullyVaccinatedData() {
+        val sceneFullyVaccinatedBinding =
+            SceneFullyVaccinatedBinding.bind(binding.root)
+
+
+        sceneFullyVaccinatedBinding.buttonScanNext.text =
+            stringContext.getString(R.string.scan_next)
+
+        sceneFullyVaccinatedBinding.txtStatus.text =
+            stringContext.getString(R.string.vaccinated)
+
+        sceneFullyVaccinatedBinding.txtYkOfficialResult.text =
+            stringContext.getString(R.string.yukon_official_result)
+
+
+        sceneFullyVaccinatedBinding.buttonScanNext
+            .setOnClickListener {
+                findNavController().popBackStack()
+            }
+
+    }
+
+
 }
