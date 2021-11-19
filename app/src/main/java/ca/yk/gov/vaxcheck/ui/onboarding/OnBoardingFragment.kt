@@ -45,7 +45,6 @@ class OnBoardingFragment : Fragment(R.layout.fragment_onboarding) {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 sharedViewModel.isOnBoardingShown.collect { shown ->
                     when (shown) {

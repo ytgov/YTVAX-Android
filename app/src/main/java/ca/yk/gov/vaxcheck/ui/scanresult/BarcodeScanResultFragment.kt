@@ -64,7 +64,6 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
             if (status != null) {
                 binding.txtFullName.text = status.name
                 when (status.status) {
-
                     ImmunizationStatus.FULLY_IMMUNIZED -> {
                         sceneFullyVaccinated.enter()
                         setFullyVaccinatedData()
@@ -83,9 +82,7 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
             }
 
             val countDownTimer = object : CountDownTimer(10000, 1000) {
-
                 override fun onTick(millisUntilFinished: Long) {}
-
                 override fun onFinish() {
                     lifecycleScope.launchWhenResumed {
                         findNavController().popBackStack()
@@ -140,7 +137,6 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
     private fun setFullyVaccinatedData() {
         val sceneFullyVaccinatedBinding =
             SceneFullyVaccinatedBinding.bind(binding.root)
-
 
         sceneFullyVaccinatedBinding.buttonScanNext.text =
             stringContext.getString(R.string.scan_next)

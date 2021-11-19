@@ -12,6 +12,7 @@ import android.util.Size
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -45,6 +46,7 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import androidx.browser.customtabs.CustomTabColorSchemeParams
+import androidx.core.graphics.drawable.toBitmap
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.setLocale
 import ca.yk.gov.vaxcheck.utils.changeLocale
 
@@ -110,15 +112,16 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
         setStrings()
         binding.swLocale.isChecked = getLocale() == LANGUAGE_CODE_FR
         binding.swLocale.setOnCheckedChangeListener { _, isChecked ->
+
             if (!isChecked) {
                 setLocale(LANGUAGE_CODE_EN)
                 sharedViewModel.setSelectLanguage(LANGUAGE_CODE_EN)
-                stringContext = requireContext().changeLocale(getLocale())
             } else {
                 setLocale(LANGUAGE_CODE_FR)
                 sharedViewModel.setSelectLanguage(LANGUAGE_CODE_FR)
-                stringContext = requireContext().changeLocale(getLocale())
             }
+
+            stringContext = requireContext().changeLocale(getLocale())
             setStrings()
         }
 
@@ -164,6 +167,10 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
 
         val builder = CustomTabsIntent.Builder()
         builder.setDefaultColorSchemeParams(defaultColors)
+        AppCompatResources.getDrawable(requireActivity(), R.drawable.ic_arrow_back)?.let {
+            builder.setCloseButtonIcon(it.toBitmap())
+        }
+
         val customTabsIntent = builder.build()
         customTabsIntent.launchUrl(requireContext(), Uri.parse(url))
     }
