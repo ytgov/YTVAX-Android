@@ -20,7 +20,7 @@
 
 
     <string name="yk_invalid_barcode_title">Invalid QR Code</string>
-    <string name="yk_invalid_barcode_message">Please scan an official Government of Yukon vaccination QR code.</string>
+    <string name="yk_invalid_barcode_message">Please scan an official government-issued QR code</string>
 
     <string name="yk_permission_required_title">Oops!</string>
     <string name="yk_permission_message">This app requires camera permission. This permission is required in order to scan an official proof of vaccination.\nTo enable camera access go to settings to grant permissions.</string>
