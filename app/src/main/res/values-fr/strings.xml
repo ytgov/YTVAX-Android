@@ -12,10 +12,8 @@
     <string name="start_scanning">Lancer la numérisation</string>
     <string name="text_ok">d\'accord</string>
 
-    <string name="business_can_scan_message">Les entreprises peuvent numériser les justificatifs d\'identité numériques ou papier officiels du gouvernement du Yukon</string>
-
     <string name="yk_camera_permission_title">Autoriser l\'accès à la caméra</string>
-    <string name="yk_camera_permission_message">Nous avons besoin d\'une autorisation pour accéder à votre appareil photo afin de pouvoir scanner une preuve officielle de vaccination.</string>
+    <string name="yk_camera_permission_message">Vous devez autoriser l’application à accéder à votre caméra pour pouvoir lire un code QR officiel.</string>
     <string name="yk_btn_allow_camera_access">Permettre l\'accès</string>
 
 
@@ -35,13 +33,7 @@
 
     <string name="in_app_update_message">La nouvelle version est prête à être installée.</string>
     <string name="update">Mettre à jour</string>
-    <string name="yk_select_a_language">Select a language</string>
-    <string name="yk_selectionnez_une_langue">Sélectionnez une langue</string>
-    <string name="yk_text_english">English</string>
-    <string name="yk_text_french">Français</string>
-    <string name="yk_text_en">En</string>
-    <string name="tv_fr">Fr</string>
-    <string name="btn_covid_info">Informations COVID-19</string>
 
+    <string name="btn_covid_info">Informations COVID-19</string>
 
 </resources>
