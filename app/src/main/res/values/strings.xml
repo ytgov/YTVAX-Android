@@ -12,8 +12,8 @@
 
     <string name="business_can_scan_message">Use this service to scan an official government-issued QR code</string>
 
-    <string name="yk_camera_permission_title">Allow Camera Access</string>
-    <string name="yk_camera_permission_message">We need permission to access your camera to be able to scan an official proof of vaccination.</string>
+    <string name="yk_camera_permission_title">Allow camera access</string>
+    <string name="yk_camera_permission_message">We need permission to access your camera to be able to use this service to scan an official government-issued QR code.</string>
     <string name="yk_btn_allow_camera_access">Allow access</string>
 
 
