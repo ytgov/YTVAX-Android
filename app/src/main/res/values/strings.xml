@@ -12,10 +12,9 @@
     <string name="start_scanning">Start scanning</string>
     <string name="text_ok">OK</string>
 
-    <string name="business_can_scan_message">Businesses can scan official Government of Yukon digital or paper immunization credentials</string>
 
-    <string name="yk_camera_permission_title">Allow Camera Access</string>
-    <string name="yk_camera_permission_message">We need permission to access your camera to be able to scan an official proof of vaccination.</string>
+    <string name="yk_camera_permission_title">Allow camera access</string>
+    <string name="yk_camera_permission_message">We need permission to access your camera to be able to use this service to scan an official government-issued QR code.</string>
     <string name="yk_btn_allow_camera_access">Allow access</string>
 
 
@@ -29,18 +28,18 @@
     <string name="yk_no_rear_camera_title">Oops!</string>
     <string name="yk_nor_rear_camera_message">Oops, It seems your device does not have a rear camera\nWe do not support scanning an official proof of vaccination using the front camera at the moment.</string>
 
-    <string name="btn_privacy_policy">Privacy Policy</string>
+    <string name="btn_privacy_policy">Privacy policy</string>
 
     <string name="no_app_found">No app found to open link!</string>
 
     <string name="in_app_update_message">Newer version is ready to install.</string>
     <string name="update">Update</string>
-    <string name="yk_select_a_language">Select a language</string>
-    <string name="yk_selectionnez_une_langue">Sélectionnez une langue</string>
-    <string name="yk_text_english">English</string>
-    <string name="yk_text_french">Français</string>
-    <string name="yk_text_en">En</string>
-    <string name="tv_fr">Fr</string>
+    <string name="yk_select_a_language" translatable="false">Select a language</string>
+    <string name="yk_selectionnez_une_langue" translatable="false">Sélectionnez une langue</string>
+    <string name="yk_text_english" translatable="false">English</string>
+    <string name="yk_text_french" translatable="false">Français</string>
+    <string name="yk_text_en" translatable="false">En</string>
+    <string name="tv_fr" translatable="false">Fr</string>
     <string name="btn_covid_info">COVID-19 information</string>
 
 
