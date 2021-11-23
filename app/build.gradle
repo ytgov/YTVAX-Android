@@ -14,7 +14,7 @@ android {
         applicationId "ca.yk.gov.vaxcheck"
         minSdk 27
         targetSdk 31
-        versionCode 4
+        versionCode 5
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

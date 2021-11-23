@@ -41,6 +41,10 @@
             @style/YK_VAX.TextAppearance.MaterialComponents.Headline4
         </item>
 
+        <item name="textAppearanceHeadline5">
+            @style/YK_VAX.TextAppearance.MaterialComponents.Headline5
+        </item>
+
         <item name="textAppearanceBody1">@style/YK_VAX.TextAppearance.MaterialComponents.Body1
         </item>
 
