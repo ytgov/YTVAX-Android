@@ -96,7 +96,7 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
 
     private fun setPartialData() {
         val scenePartiallyVaccinatedBinding =
-            ScenePartiallyVaccinatedBinding.bind(binding.root)
+            ScenePartiallyVaccinatedBinding.bind(binding.clRoot)
 
 
         scenePartiallyVaccinatedBinding.buttonScanNext.text =
@@ -118,7 +118,7 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
 
     private fun setNoRecordData() {
         val sceneNoRecordBinding =
-            SceneNoRecordBinding.bind(binding.root)
+            SceneNoRecordBinding.bind(binding.clRoot)
 
         sceneNoRecordBinding.buttonScanNext.text =
             stringContext.getString(R.string.scan_next)
@@ -136,7 +136,7 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
 
     private fun setFullyVaccinatedData() {
         val sceneFullyVaccinatedBinding =
-            SceneFullyVaccinatedBinding.bind(binding.root)
+            SceneFullyVaccinatedBinding.bind(binding.clRoot)
 
         sceneFullyVaccinatedBinding.buttonScanNext.text =
             stringContext.getString(R.string.scan_next)

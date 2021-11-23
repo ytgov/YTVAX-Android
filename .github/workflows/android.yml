@@ -1,9 +1,9 @@
-name: Android CI/CD
+name: Android CICD Firebase deployment
 
 on:
   pull_request:
     branches:
-      - develop
+      - dev
   push:
     branches:
       - main
@@ -22,6 +22,9 @@ jobs:
         with:
           java-version: 11
 
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
       - name: clean build
         run: ./gradlew clean build
         env:
@@ -34,11 +37,38 @@ jobs:
           name: yk_verifier_dev.apk
           path: app/build/outputs/apk/dev/debug/app-dev-debug.apk
 
+      - name: upload stage apk
+        uses: actions/upload-artifact@v1
+        with:
+          name: yk_verifier_stage.apk
+          path: app/build/outputs/apk/stage/debug/app-stage-debug.apk
+
       - name: upload prod apk
         uses: actions/upload-artifact@v1
         with:
           name: yk_verifier_prod.apk
           path: app/build/outputs/apk/prod/debug/app-prod-debug.apk
 
+      - name: upload dev APK to firebase
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: freshworks-internal
+          file: app/build/outputs/apk/dev/debug/app-dev-debug.apk
 
+      - name: upload stage APK to firebase
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: freshworks-internal
+          file: app/build/outputs/apk/stage/debug/app-stage-debug.apk
 
+      - name: upload prod APK to firebase
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: freshworks-internal
+          file: app/build/outputs/apk/prod/debug/app-prod-debug.apk
