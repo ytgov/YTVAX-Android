@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Splash screen theme -->
     <style name="Theme.YK_VAX.Splash">
-        <item name="android:windowBackground">@drawable/bc_splash_background</item>
+        <item name="android:windowBackground">@drawable/yk_splash_background</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -39,6 +39,10 @@
 
         <item name="textAppearanceHeadline4">
             @style/YK_VAX.TextAppearance.MaterialComponents.Headline4
+        </item>
+
+        <item name="textAppearanceHeadline5">
+            @style/YK_VAX.TextAppearance.MaterialComponents.Headline5
         </item>
 
         <item name="textAppearanceBody1">@style/YK_VAX.TextAppearance.MaterialComponents.Body1

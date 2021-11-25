@@ -1,2 +1,3 @@
 rootProject.name = "YKVAX-Android"
 include ':app'
+include ':shcDecoder'

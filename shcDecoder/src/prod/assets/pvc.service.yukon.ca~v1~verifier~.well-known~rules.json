@@ -1,0 +1,47 @@
+{
+  "publishDateTime": "2021-11-10T18:53:25+0000",
+  "ruleSet": [
+    {
+      "mixTypesAllowed": true,
+      "mixTypesRuRequired": 3,
+      "ruRequired": 3,
+      "intervalRequired": true,
+      "daysSinceLastInterval": 1,
+      "ruleTarget": "https://pvc.service.yukon.ca/v1/verifier/.well-known/issuers.json",
+      "version": "V1",
+      "vaccinationRules": [
+        {
+          "cvxCode": "208",
+          "type": 1,
+          "ru": 2
+        },
+        {
+          "cvxCode": "207",
+          "type": 1,
+          "ru": 2
+        },
+        {
+          "cvxCode": "210",
+          "type": 2,
+          "ru": 2
+        },
+        {
+          "cvxCode": "212",
+          "type": 2,
+          "ru": 3
+        },
+        {
+          "cvxCode": "511",
+          "type": 3,
+          "ru": 1
+        },
+        {
+          "cvxCode": "510",
+          "type": 3,
+          "ru": 1
+        }
+      ]
+    }
+  ],
+  "ruleSetVersion": "V1"
+}
