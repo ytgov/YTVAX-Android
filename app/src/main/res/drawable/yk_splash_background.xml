@@ -15,7 +15,7 @@
     <item
         android:drawable="@drawable/ic_yukon_vaccination_verifier"
         android:gravity="center"
-        android:top="170dp"
+        android:top="100dp"
          />
 
 

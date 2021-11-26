@@ -63,7 +63,6 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
         sharedViewModel.status.observe(viewLifecycleOwner, { status ->
             if (status != null) {
                 binding.txtFullName.text = status.name
-                binding.txtAppName.text = stringContext.getString(R.string.y_k_vaccine_card_verifier)
                 when (status.status) {
                     ImmunizationStatus.FULLY_IMMUNIZED -> {
                         sceneFullyVaccinated.enter()
