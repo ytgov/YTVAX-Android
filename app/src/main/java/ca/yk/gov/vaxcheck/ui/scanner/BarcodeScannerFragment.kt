@@ -14,7 +14,11 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.camera.core.*
+import androidx.camera.core.Camera
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
+import androidx.camera.core.TorchState
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -137,27 +141,21 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
         }
     }
 
-
     private fun setStrings() {
 
-        binding.txtCovidInfo.setText(stringContext.getString(R.string.btn_covid_info))
-        binding.txtPrivacyPolicy.setText(stringContext.getString(R.string.btn_privacy_policy))
+        binding.txtCovidInfo.text = stringContext.getString(R.string.btn_covid_info)
+        binding.txtPrivacyPolicy.text = stringContext.getString(R.string.btn_data_collection_notice)
 
         binding.txtCovidInfo.setSpannableLink {
-            showCovidInfo(getString(R.string.url_covid_info).replace(LANGUAGE_CODE_EN, getLocale()))
+            showCovidInfo(stringContext.getString(R.string.url_covid_info))
         }
 
         binding.txtPrivacyPolicy.setSpannableLink {
             showPrivacyPolicy(
-                getString(R.string.url_privacy_policy).replace(
-                    LANGUAGE_CODE_EN,
-                    getLocale()
-                )
+                stringContext.getString(R.string.url_privacy_policy)
             )
         }
-
     }
-
 
     private fun showCovidInfo(url: String) {
         val colorInt = ContextCompat.getColor(requireContext(), R.color.dark_blue)
@@ -174,7 +172,6 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
         val customTabsIntent = builder.build()
         customTabsIntent.launchUrl(requireContext(), Uri.parse(url))
     }
-
 
     private suspend fun collectOnBoardingFlow() {
         sharedViewModel.isOnBoardingShown.collect { shown ->
@@ -200,18 +197,11 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
         }
     }
 
-
-    private fun reCreate() {
-        lifecycleScope.launch {
-            startActivity(Intent(requireContext(), SplashActivity::class.java))
-            requireActivity().finish()
-        }
-    }
-
     private suspend fun collectSelectedLanguageFlow() {
         sharedViewModel.getSelectedLanguage.collect { code ->
             when (code) {
-                LANGUAGE_CODE_EN, LANGUAGE_CODE_FR -> {
+                LANGUAGE_CODE_EN,
+                LANGUAGE_CODE_FR -> {
                     collectOnBoardingFlow()
                 }
                 else -> {
@@ -225,7 +215,6 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
             }
         }
     }
-
 
     private suspend fun collectImmunizationStatus() {
         viewModel.status.collect { status ->

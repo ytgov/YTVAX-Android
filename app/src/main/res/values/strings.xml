@@ -24,7 +24,7 @@
     <string name="yk_no_rear_camera_title">Oops!</string>
     <string name="yk_nor_rear_camera_message">Oops, It seems your device does not have a rear camera\nWe do not support scanning an official proof of vaccination using the front camera at the moment.</string>
 
-    <string name="btn_privacy_policy">Privacy policy</string>
+    <string name="btn_data_collection_notice">Data collection notice</string>
 
     <string name="no_app_found">No app found to open link!</string>
 

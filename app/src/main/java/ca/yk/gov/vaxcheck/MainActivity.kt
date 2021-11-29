@@ -41,11 +41,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     override fun attachBaseContext(context: Context) {
         super.attachBaseContext(context.changeLocale(getLocale()))
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

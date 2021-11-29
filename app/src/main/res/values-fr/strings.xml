@@ -25,7 +25,7 @@
     <string name="yk_no_rear_camera_title">Oups!</string>
     <string name="yk_nor_rear_camera_message">Oups, il semble que votre appareil n\'ait pas de caméra arrière\nPour le moment, nous ne prenons pas en charge la numérisation d\'une preuve officielle de vaccination à l\'aide de la caméra frontale.</string>
 
-    <string name="btn_privacy_policy">Politique de confidentialité</string>
+    <string name="btn_data_collection_notice">Avis sur la collecte de données</string>
 
     <string name="no_app_found">Aucune application trouvée pour ouvrir le lien !</string>
 
