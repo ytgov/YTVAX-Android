@@ -4,10 +4,9 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Size
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
@@ -31,7 +30,6 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import ca.bc.gov.shcdecoder.model.ImmunizationStatus
 import ca.yk.gov.vaxcheck.R
-import ca.yk.gov.vaxcheck.SplashActivity
 import ca.yk.gov.vaxcheck.barcodeanalyzer.BarcodeAnalyzer
 import ca.yk.gov.vaxcheck.barcodeanalyzer.ScanningResultListener
 import ca.yk.gov.vaxcheck.databinding.FragmentBarcodeScannerBinding
@@ -50,9 +48,17 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import androidx.browser.customtabs.CustomTabColorSchemeParams
+import androidx.core.content.FileProvider
 import androidx.core.graphics.drawable.toBitmap
+import ca.yk.gov.vaxcheck.BuildConfig
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.setLocale
 import ca.yk.gov.vaxcheck.utils.changeLocale
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+
+
+
 
 
 /**
@@ -158,6 +164,7 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
     }
 
     private fun showCovidInfo(url: String) {
+        val chromeId = "com.android.chrome"
         val colorInt = ContextCompat.getColor(requireContext(), R.color.dark_blue)
         val defaultColors = CustomTabColorSchemeParams.Builder()
             .setToolbarColor(colorInt)
@@ -170,8 +177,37 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
         }
 
         val customTabsIntent = builder.build()
-        customTabsIntent.launchUrl(requireContext(), Uri.parse(url))
+        customTabsIntent.intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        customTabsIntent.intent.data = createUri(requireContext())!!
+        val packageManager = requireContext().packageManager
+        val resolveInfoList = packageManager.queryIntentActivities(customTabsIntent.intent, PackageManager.MATCH_DEFAULT_ONLY)
+        for (resolveInfo in resolveInfoList) {
+            val packageName = resolveInfo.activityInfo.packageName
+            if (TextUtils.equals(packageName, chromeId))
+                customTabsIntent.intent.setPackage(chromeId)
+
+        }
+
+        customTabsIntent.launchUrl(requireContext(), customTabsIntent.intent.data!!)
     }
+
+
+    private fun createUri(context: Context):Uri? {
+        try {
+            val redirect = File(context.externalCacheDir, "covid_info.html")
+            val templateString =
+                context.assets.open("test_file.html").bufferedReader().use { it.readText() }
+            val fileOutputStream = FileOutputStream(redirect)
+            fileOutputStream.write(templateString.toByteArray())
+            return FileProvider.getUriForFile(
+                context, BuildConfig.APPLICATION_ID + ".provider", redirect
+            )
+        } catch (e: IOException) {
+            e.printStackTrace()
+            return null
+        }
+    }
+
 
     private suspend fun collectOnBoardingFlow() {
         sharedViewModel.isOnBoardingShown.collect { shown ->

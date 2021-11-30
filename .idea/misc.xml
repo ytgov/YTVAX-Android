@@ -54,6 +54,7 @@
         <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/scene_fully_vaccinated.xml" value="0.14" />
         <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/scene_no_record.xml" value="0.21" />
         <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/scene_partially_vaccinated.xml" value="0.103125" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/xml/provider_paths.xml" value="0.1" />
       </map>
     </option>
   </component>
