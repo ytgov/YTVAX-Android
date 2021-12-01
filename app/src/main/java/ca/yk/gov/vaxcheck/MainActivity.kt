@@ -1,8 +1,13 @@
 package ca.yk.gov.vaxcheck
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import ca.yk.gov.vaxcheck.utils.LanguageConstants.getLocale
+import ca.yk.gov.vaxcheck.utils.changeLocale
+
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -14,6 +19,8 @@ import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.hilt.android.AndroidEntryPoint
 
+
+
 /**
  * [MainActivity]
  *
@@ -21,9 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
     private lateinit var appUpdateManager: AppUpdateManager
-
     private lateinit var appUpdateInfo: AppUpdateInfo
 
     companion object {
@@ -34,6 +39,10 @@ class MainActivity : AppCompatActivity() {
         if (state.installStatus() == InstallStatus.DOWNLOADED) {
             popupSnackBarForCompleteUpdate()
         }
+    }
+
+    override fun attachBaseContext(context: Context) {
+        super.attachBaseContext(context.changeLocale(getLocale()))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,6 +102,9 @@ class MainActivity : AppCompatActivity() {
             updateInfo, AppUpdateType.FLEXIBLE, this, REQUEST_CODE_FLEXIBLE_UPDATE
         )
     }
+
+
+
 
     private fun popupSnackBarForCompleteUpdate() {
         Snackbar.make(

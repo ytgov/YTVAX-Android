@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import ca.yk.gov.vaxcheck.R
+import java.util.*
 
 /**
  * Helper function to read file from asset
@@ -49,3 +50,11 @@ fun TextView.setSpannableLink(text: String? = null, onClick: () -> Unit) {
 
 fun Context.toast(message: String) =
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+
+fun Context.changeLocale(language: String): Context {
+    val locale = Locale(language)
+    Locale.setDefault(locale)
+    val config = this.resources.configuration
+    config.setLocale(locale)
+    return createConfigurationContext(config)
+}

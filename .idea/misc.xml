@@ -29,13 +29,31 @@
         <entry key="..\:/documents/YKVAX-11-5-21/app/src/main/res/layout/scene_fully_vaccinated.xml" value="0.1" />
         <entry key="..\:/documents/YKVAX-11-5-21/app/src/main/res/layout/scene_no_record.xml" value="0.25" />
         <entry key="..\:/documents/YKVAX-11-5-21/app/src/main/res/layout/scene_partially_vaccinated.xml" value="0.18" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_arrow_back.xml" value="0.10364583333333334" />
         <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_bc_app_logo.xml" value="0.159375" />
         <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_bc_app_logo_with_text.xml" value="0.159375" />
         <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_bc_covid_19.xml" value="0.159375" />
         <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_bc_logo.xml" value="0.159375" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_check.xml" value="0.19114583333333332" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_checkmark.xml" value="0.19114583333333332" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_educational_mobile.xml" value="0.1296875" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_mobile_new.xml" value="0.1296875" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_radio_checked.xml" value="0.21625" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_radio_unchecked.xml" value="0.14791666666666667" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/ic_yk_app_logo_splash.xml" value="0.14791666666666667" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/radio_button_border.xml" value="0.21625" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/radio_drawable_inset.xml" value="0.21625" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/selector_custom_radio_buttons.xml" value="0.21625" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/solid_rectangle.xml" value="0.21625" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/drawable/yk_splash_background.xml" value="0.25125" />
         <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/activity_main.xml" value="0.14322916666666666" />
         <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/fragment_barcode_scan_result.xml" value="0.1" />
-        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/scene_fully_vaccinated.xml" value="0.17" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/fragment_barcode_scanner.xml" value="0.2635416666666667" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/fragment_onboarding.xml" value="0.15" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/fragment_select_language.xml" value="0.2" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/scene_fully_vaccinated.xml" value="0.14" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/scene_no_record.xml" value="0.21" />
+        <entry key="..\:/documents/YTVAX-Android/app/src/main/res/layout/scene_partially_vaccinated.xml" value="0.103125" />
       </map>
     </option>
   </component>
@@ -44,5 +62,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.12" />
+      </ProjectState>
+    </option>
   </component>
 </project>

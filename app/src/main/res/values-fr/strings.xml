@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Application de \n vérification de la preuve de \n vaccination</string>
+    <string name="y_k_vaccine_card_verifier">Application de \n vérification de la preuve de \n vaccination</string>
+    <string name="yk_vaccine_verifier">Vérification de la preuve \n de vaccination</string>
+
+    <string name="yukon_official_result">Résultat officiel du gouvernement du Yukon</string>
+    <string name="invalid_qr_code">Code QR invalide</string>
+    <string name="partially_vaccinated">Partiellement\nvacciné</string>
+    <string name="vaccinated">Pleinement\nvacciné</string>
+    <string name="scan_next">Code QR suivant</string>
+    <string name="text_ok">OK</string>
+
+    <string name="yk_camera_permission_title">Autoriser l\'accès à la caméra</string>
+    <string name="yk_camera_permission_message">Vous devez autoriser l’application à accéder à votre caméra pour pouvoir lire un code QR officiel.</string>
+    <string name="yk_btn_allow_camera_access">Autoriser l’accès</string>
+
+
+    <string name="yk_invalid_barcode_title">Code QR invalide</string>
+    <string name="yk_invalid_barcode_message">Lire un code QR officiel</string>
+
+    <string name="yk_permission_required_title">Oups!</string>
+    <string name="yk_permission_message">Cette application nécessite l\'autorisation de la caméra. Cette autorisation est requise pour numériser une preuve officielle de vaccination.\nPour activer l\'accès à la caméra, accédez aux paramètres pour accorder des autorisations.</string>
+    <string name="exit">Sortir</string>
+
+    <string name="yk_no_rear_camera_title">Oups!</string>
+    <string name="yk_nor_rear_camera_message">Oups, il semble que votre appareil n\'ait pas de caméra arrière\nPour le moment, nous ne prenons pas en charge la numérisation d\'une preuve officielle de vaccination à l\'aide de la caméra frontale.</string>
+
+    <string name="btn_data_collection_notice">Avis sur la collecte de données</string>
+
+    <string name="no_app_found">Aucune application trouvée pour ouvrir le lien !</string>
+
+    <string name="in_app_update_message">La nouvelle version est prête à être installée.</string>
+    <string name="update">Mettre à jour</string>
+
+    <string name="btn_covid_info">Informations sur la COVID-19</string>
+
+</resources>
