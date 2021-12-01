@@ -1,5 +1,5 @@
 {
-  "publishDateTime": "2021-11-10T18:53:25+0000",
+  "publishDateTime": "2021-11-29T17:08:22+0000",
   "ruleSet": [
     {
       "mixTypesAllowed": true,
@@ -7,23 +7,26 @@
       "ruRequired": 3,
       "intervalRequired": true,
       "daysSinceLastInterval": 1,
-      "ruleTarget": "https://pvc.service.yukon.ca/test/v1/verifier/.well-known/issuers.json",
+      "ruleTarget": "https://phsasmarthealthcard-dev.azurewebsites.net/v1/trusted/.well-known/issuers.json",
       "version": "V1",
       "vaccinationRules": [
         {
           "cvxCode": "208",
           "type": 1,
-          "ru": 2
+          "ru": 2,
+          "minDays": "19"
         },
         {
           "cvxCode": "207",
           "type": 1,
-          "ru": 2
+          "ru": 2,
+          "minDays": "21"
         },
         {
           "cvxCode": "210",
           "type": 2,
-          "ru": 2
+          "ru": 2,
+          "minDays": "28"
         },
         {
           "cvxCode": "212",
@@ -31,14 +34,31 @@
           "ru": 3
         },
         {
+          "cvxCode": "217",
+          "type": 2,
+          "ru": 2
+        },
+        {
+          "cvxCode": "218",
+          "type": 2,
+          "ru": 2
+        },
+        {
+          "cvxCode": "219",
+          "type": 2,
+          "ru": 2
+        },
+        {
           "cvxCode": "511",
           "type": 3,
-          "ru": 1
+          "ru": 1,
+          "minDays": "14"
         },
         {
           "cvxCode": "510",
           "type": 3,
-          "ru": 1
+          "ru": 1,
+          "minDays": "21"
         }
       ]
     }
