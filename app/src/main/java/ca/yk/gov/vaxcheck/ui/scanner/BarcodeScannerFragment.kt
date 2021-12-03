@@ -36,9 +36,6 @@ import ca.yk.gov.vaxcheck.databinding.FragmentBarcodeScannerBinding
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.LANGUAGE_CODE_EN
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.LANGUAGE_CODE_FR
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.getLocale
-import ca.yk.gov.vaxcheck.utils.setSpannableLink
-import ca.yk.gov.vaxcheck.utils.toast
-import ca.yk.gov.vaxcheck.utils.viewBindings
 import ca.yk.gov.vaxcheck.viewmodel.BarcodeScanResultViewModel
 import ca.yk.gov.vaxcheck.viewmodel.SharedViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -51,8 +48,8 @@ import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.core.content.FileProvider
 import androidx.core.graphics.drawable.toBitmap
 import ca.yk.gov.vaxcheck.BuildConfig
+import ca.yk.gov.vaxcheck.utils.*
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.setLocale
-import ca.yk.gov.vaxcheck.utils.changeLocale
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -107,9 +104,7 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
         stringContext = requireContext().changeLocale(getLocale())
 
         viewLifecycleOwner.lifecycleScope.launch {
-
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-
                 launch {
                     collectSelectedLanguageFlow()
                 }
@@ -157,14 +152,12 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
         }
 
         binding.txtPrivacyPolicy.setSpannableLink {
-            showPrivacyPolicy(
-                stringContext.getString(R.string.url_privacy_policy)
-            )
+            showPrivacyHtml()
         }
     }
 
+
     private fun showCovidInfo(url: String) {
-        val chromeId = "com.android.chrome"
         val colorInt = ContextCompat.getColor(requireContext(), R.color.dark_blue)
         val defaultColors = CustomTabColorSchemeParams.Builder()
             .setToolbarColor(colorInt)
@@ -177,36 +170,50 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
         }
 
         val customTabsIntent = builder.build()
-        customTabsIntent.intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        customTabsIntent.intent.data = createUri(requireContext())!!
-        val packageManager = requireContext().packageManager
-        val resolveInfoList = packageManager.queryIntentActivities(customTabsIntent.intent, PackageManager.MATCH_DEFAULT_ONLY)
-        for (resolveInfo in resolveInfoList) {
-            val packageName = resolveInfo.activityInfo.packageName
-            if (TextUtils.equals(packageName, chromeId))
-                customTabsIntent.intent.setPackage(chromeId)
-
-        }
-
-        customTabsIntent.launchUrl(requireContext(), customTabsIntent.intent.data!!)
+        customTabsIntent.launchUrl(requireContext(), Uri.parse(url))
     }
 
 
-    private fun createUri(context: Context):Uri? {
-        try {
-            val redirect = File(context.externalCacheDir, "covid_info.html")
-            val templateString =
-                context.assets.open("test_file.html").bufferedReader().use { it.readText() }
-            val fileOutputStream = FileOutputStream(redirect)
-            fileOutputStream.write(templateString.toByteArray())
-            return FileProvider.getUriForFile(
-                context, BuildConfig.APPLICATION_ID + ".provider", redirect
-            )
-        } catch (e: IOException) {
-            e.printStackTrace()
-            return null
-        }
+    private fun showPrivacyHtml() {
+//        val chromeId = "com.android.chrome"
+//        val colorInt = ContextCompat.getColor(requireContext(), R.color.dark_blue)
+//        val defaultColors = CustomTabColorSchemeParams.Builder()
+//            .setToolbarColor(colorInt)
+//            .build()
+//
+//        val builder = CustomTabsIntent.Builder()
+//
+//        builder.setDefaultColorSchemeParams(defaultColors)
+//        AppCompatResources.getDrawable(requireActivity(), R.drawable.ic_arrow_back)?.let {
+//            builder.setCloseButtonIcon(it.toBitmap())
+//        }
+//
+//        builder.setShowTitle(true)
+//        val customTabsIntent = builder.build()
+//        val uri = Uri.parse("content://"+BuildConfig.APPLICATION_ID +"/index.html")
+//
+//        customTabsIntent.intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+//        customTabsIntent.intent.type = "text/plain"
+//        customTabsIntent.intent.data = uri
+//
+//        val packageManager = requireContext().packageManager
+//        val resolveInfoList = packageManager.queryIntentActivities(customTabsIntent.intent, PackageManager.MATCH_DEFAULT_ONLY)
+//        for (resolveInfo in resolveInfoList) {
+//            val packageName = resolveInfo.activityInfo.packageName
+//            if (TextUtils.equals(packageName, chromeId))
+//                customTabsIntent.intent.setPackage(chromeId)
+//
+//        }
+//
+//        customTabsIntent.launchUrl(requireContext(), customTabsIntent.intent.data!!)
+
+
+        findNavController().navigate(BarcodeScannerFragmentDirections
+            .actionBarcodeScannerFragmentToWebFragment())
+
     }
+
+
 
 
     private suspend fun collectOnBoardingFlow() {

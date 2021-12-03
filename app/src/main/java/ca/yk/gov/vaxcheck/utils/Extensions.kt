@@ -1,6 +1,7 @@
 package ca.yk.gov.vaxcheck.utils
 
 import android.content.Context
+import android.net.Uri
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
@@ -9,7 +10,12 @@ import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.FileProvider
+import ca.yk.gov.vaxcheck.BuildConfig
 import ca.yk.gov.vaxcheck.R
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.util.*
 
 /**
@@ -58,3 +64,21 @@ fun Context.changeLocale(language: String): Context {
     config.setLocale(locale)
     return createConfigurationContext(config)
 }
+
+fun Context.createUri(fileName: String): Uri?{
+    try {
+        val redirect = File(externalCacheDir, "privacy_policy.html")
+        val templateString =
+            assets.open(fileName).bufferedReader().use { it.readText() }
+        val fileOutputStream = FileOutputStream(redirect)
+        fileOutputStream.write(templateString.toByteArray())
+        return FileProvider.getUriForFile(
+            this, BuildConfig.APPLICATION_ID + ".provider", redirect
+        )
+    } catch (e: IOException) {
+        e.printStackTrace()
+        return null
+    }
+}
+
+

@@ -4,7 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 
-class Helper {
+class Helper  {
 
     /*
     * Check is network connection

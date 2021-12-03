@@ -16,6 +16,12 @@
             app:enterAnim="@anim/slide_up"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
+
+        <action
+            android:id="@+id/action_barcodeScannerFragment_to_webFragment"
+            app:destination="@id/webViewFragment"/>
+
+
     </fragment>
 
     <fragment
@@ -23,6 +29,8 @@
         android:name="ca.yk.gov.vaxcheck.ui.scanresult.BarcodeScanResultFragment"
         android:label="BarcodeScanResultFragment"
         tools:layout="@layout/fragment_barcode_scan_result" />
+
+
 
     <fragment
         android:id="@+id/onBoardingFragment"
@@ -39,6 +47,16 @@
         tools:layout="@layout/fragment_select_language">
 
     </fragment>
+
+
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="ca.yk.gov.vaxcheck.ui.webview.WebFragment"
+        android:label="web_view"
+        tools:layout="@layout/fragment_web_view">
+
+    </fragment>
+
 
 
 </navigation>
