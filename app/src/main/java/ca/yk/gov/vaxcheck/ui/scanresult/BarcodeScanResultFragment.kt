@@ -11,10 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import ca.bc.gov.shcdecoder.model.ImmunizationStatus
 import ca.yk.gov.vaxcheck.R
-import ca.yk.gov.vaxcheck.databinding.FragmentBarcodeScanResultBinding
-import ca.yk.gov.vaxcheck.databinding.SceneFullyVaccinatedBinding
-import ca.yk.gov.vaxcheck.databinding.SceneNoRecordBinding
-import ca.yk.gov.vaxcheck.databinding.ScenePartiallyVaccinatedBinding
+import ca.yk.gov.vaxcheck.databinding.*
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.getLocale
 import ca.yk.gov.vaxcheck.utils.changeLocale
 import ca.yk.gov.vaxcheck.utils.viewBindings
@@ -36,6 +33,8 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
     private lateinit var sceneFullyVaccinated: Scene
 
     private lateinit var scenePartiallyVaccinated: Scene
+
+    private lateinit var sceneNotVaccinated: Scene
 
     private lateinit var sceneNoRecord: Scene
 
@@ -60,6 +59,12 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
         sceneNoRecord =
             Scene.getSceneForLayout(binding.sceneRoot, R.layout.scene_no_record, requireContext())
 
+        sceneNotVaccinated = Scene.getSceneForLayout(
+            binding.sceneRoot,
+            R.layout.scene_not_vaccinated,
+            requireContext()
+        )
+
         sharedViewModel.status.observe(viewLifecycleOwner, { status ->
             if (status != null) {
                 binding.txtFullName.text = status.name
@@ -79,6 +84,7 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
                         sceneNoRecord.enter()
                         setNoRecordData()
                     }
+
                 }
             }
 
@@ -104,7 +110,7 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
             stringContext.getString(R.string.scan_next)
 
         scenePartiallyVaccinatedBinding.txtStatus.text =
-            stringContext.getString(R.string.partially_vaccinated)
+            stringContext.getString(R.string.partially_meets_requirement)
 
         scenePartiallyVaccinatedBinding.txtYkOfficialResult.text =
             stringContext.getString(R.string.yukon_official_result)
@@ -143,7 +149,7 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
             stringContext.getString(R.string.scan_next)
 
         sceneFullyVaccinatedBinding.txtStatus.text =
-            stringContext.getString(R.string.vaccinated)
+            stringContext.getString(R.string.meets_requirement)
 
         sceneFullyVaccinatedBinding.txtYkOfficialResult.text =
             stringContext.getString(R.string.yukon_official_result)
@@ -155,6 +161,29 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
             }
 
     }
+
+    private fun setNotVaccinatedData() {
+        val sceneFullyVaccinatedBinding =
+            SceneNotVaccinatedBinding.bind(binding.clRoot)
+
+        sceneFullyVaccinatedBinding.buttonScanNext.text =
+            stringContext.getString(R.string.scan_next)
+
+        sceneFullyVaccinatedBinding.txtStatus.text =
+            stringContext.getString(R.string.does_not_meet_requirement)
+
+        sceneFullyVaccinatedBinding.txtYkOfficialResult.text =
+            stringContext.getString(R.string.yukon_official_result)
+
+
+        sceneFullyVaccinatedBinding.buttonScanNext
+            .setOnClickListener {
+                findNavController().popBackStack()
+            }
+
+    }
+
+
 
 
 }

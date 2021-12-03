@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/status_yellow">
+    android:background="@color/dark_grey">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:layout_marginTop="@dimen/xl"
                 android:layout_marginEnd="@dimen/medium"
                 android:layout_marginBottom="@dimen/rect_line_margin_bottom"
-                android:background="@drawable/dotted_rectangle"
+                android:background="@drawable/solid_rectangle"
                 app:layout_constraintBottom_toBottomOf="@+id/txt_yk_official_result"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,31 +39,34 @@
                 style="?textAppearanceHeadline1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/medium"
-                android:layout_marginTop="@dimen/partial_text_result_margin_top"
-                android:layout_marginEnd="@dimen/medium"
-                android:text="@string/partially_meets_requirement"
+                android:layout_marginTop="@dimen/medium"
+                android:text="@string/does_not_meet_requirement"
                 android:textAlignment="center"
-                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/img_right_tick" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txt_yk_official_result"
                 style="?textAppearanceBody1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/medium"
                 android:layout_marginTop="@dimen/medium"
-                android:layout_marginEnd="@dimen/medium"
                 android:text="@string/yukon_official_result"
-                android:textAlignment="center"
-                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_status" />
 
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/img_right_tick"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/image_right_tick_margin_top"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_checkmark"
+                tools:ignore="ContentDescription" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonScanNext"
