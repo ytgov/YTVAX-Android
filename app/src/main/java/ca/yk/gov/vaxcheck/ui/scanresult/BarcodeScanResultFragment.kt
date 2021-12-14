@@ -163,20 +163,20 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
     }
 
     private fun setNotVaccinatedData() {
-        val sceneFullyVaccinatedBinding =
+        val sceneNotVaccinatedBinding =
             SceneNotVaccinatedBinding.bind(binding.clRoot)
 
-        sceneFullyVaccinatedBinding.buttonScanNext.text =
+        sceneNotVaccinatedBinding.buttonScanNext.text =
             stringContext.getString(R.string.scan_next)
 
-        sceneFullyVaccinatedBinding.txtStatus.text =
+        sceneNotVaccinatedBinding.txtStatus.text =
             stringContext.getString(R.string.does_not_meet_requirement)
 
-        sceneFullyVaccinatedBinding.txtYkOfficialResult.text =
+        sceneNotVaccinatedBinding.txtYkOfficialResult.text =
             stringContext.getString(R.string.yukon_official_result)
 
 
-        sceneFullyVaccinatedBinding.buttonScanNext
+        sceneNotVaccinatedBinding.buttonScanNext
             .setOnClickListener {
                 findNavController().popBackStack()
             }
