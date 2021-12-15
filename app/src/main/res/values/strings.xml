@@ -38,5 +38,8 @@
     <string name="yk_text_en" translatable="false">En</string>
     <string name="tv_fr" translatable="false">Fr</string>
     <string name="btn_covid_info">COVID-19 information</string>
+    <string name="meets_requirement">Meets requirement</string>
+    <string name="partially_meets_requirement">Partially meets \n requirement</string>
+    <string name="does_not_meet_requirement">Does not meet requirement</string>
 
 </resources>

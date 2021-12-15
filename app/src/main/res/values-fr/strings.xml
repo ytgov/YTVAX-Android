@@ -33,5 +33,8 @@
     <string name="update">Mettre à jour</string>
 
     <string name="btn_covid_info">Informations sur la COVID-19</string>
+    <string name="meets_requirement">Répond aux exigences</string>
+    <string name="partially_meets_requirement">Répond partiellement aux exigences</string>
+    <string name="does_not_meet_requirement">Ne répond pas aux exigences</string>
 
 </resources>
