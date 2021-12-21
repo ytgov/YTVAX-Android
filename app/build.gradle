@@ -36,6 +36,7 @@ android {
             resValue "string", "rules_url", "https://ds9mwekyyprcy.cloudfront.net/rules.json"
             resValue "string", "default_issuer_json", "phsasmarthealthcard-dev.azurewebsites.net~v1~trusted~.well-known~issuers.json"
             resValue "string", "default_rules_json", "ds9mwekyyprcy.cloudfront.net~rules.json"
+            resValue "string", "deferrals_domain", "pvc.service.yukon.ca"
         }
 
         stage {
@@ -45,6 +46,7 @@ android {
             resValue "string", "rules_url", "https://pvc.service.yukon.ca/test/v1/verifier/.well-known/rules.json"
             resValue "string", "default_issuer_json", "pvc.service.yukon.ca~test~v1~verifier~.well-known~issuers.json"
             resValue "string", "default_rules_json", "pvc.service.yukon.ca~test~v1~verifier~.well-known~rules.json"
+            resValue "string", "deferrals_domain", "pvc.service.yukon.ca"
         }
 
         prod {
@@ -53,6 +55,7 @@ android {
             resValue "string", "rules_url", "https://pvc.service.yukon.ca/v1/verifier/.well-known/rules.json"
             resValue "string", "default_issuer_json", "pvc.service.yukon.ca~v1~verifier~.well-known~issuers.json"
             resValue "string", "default_rules_json", "pvc.service.yukon.ca~v1~verifier~.well-known~rules.json"
+            resValue "string", "deferrals_domain", "pvc.service.yukon.ca"
         }
     }
 
