@@ -25,7 +25,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import ca.bc.gov.shcdecoder.model.ImmunizationStatus
 import ca.yk.gov.vaxcheck.R
 import ca.yk.gov.vaxcheck.barcodeanalyzer.BarcodeAnalyzer
 import ca.yk.gov.vaxcheck.barcodeanalyzer.ScanningResultListener
@@ -137,19 +136,10 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
 
     private suspend fun collectImmunizationStatus() {
         viewModel.status.collect { status ->
-            when (status.status) {
-                ImmunizationStatus.FULLY_IMMUNIZED,
-                ImmunizationStatus.PARTIALLY_IMMUNIZED -> {
-                    sharedViewModel.setStatus(status)
-                    findNavController().navigate(
-                        R.id.action_barcodeScannerFragment_to_barcodeScanResultFragment
-                    )
-                }
-
-                ImmunizationStatus.INVALID_QR_CODE -> {
-                    onFailure()
-                }
-            }
+            sharedViewModel.setStatus(status)
+            findNavController().navigate(
+                R.id.action_barcodeScannerFragment_to_barcodeScanResultFragment
+            )
         }
     }
 
@@ -191,7 +181,7 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
             .setTitle(getString(R.string.yk_permission_required_title))
             .setCancelable(false)
             .setMessage(getString(R.string.yk_permission_message))
-            .setNegativeButton(getString(R.string.exit)) { dialog, which ->
+            .setNegativeButton(getString(R.string.exit)) { dialog, _ ->
                 if (!findNavController().popBackStack() || !findNavController().navigateUp()) {
                     requireActivity().finish()
                 }
@@ -257,7 +247,7 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
                 .setTitle(getString(R.string.yk_no_rear_camera_title))
                 .setCancelable(false)
                 .setMessage(getString(R.string.yk_nor_rear_camera_message))
-                .setNegativeButton(getString(R.string.exit)) { dialog, which ->
+                .setNegativeButton(getString(R.string.exit)) { dialog, _ ->
                     if (!findNavController().popBackStack() || !findNavController().navigateUp()) {
                         requireActivity().finish()
                     }
@@ -314,9 +304,5 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
                     dialog.dismiss()
                 }
                 .show()
-        }
-
-        companion object {
-            const val ON_BOARDING_SHOWN = "ON_BOARDING_SHOWN"
         }
     }

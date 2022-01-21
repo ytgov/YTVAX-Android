@@ -4,6 +4,7 @@
     <string name="yukon_official_result">Official Government of Yukon result</string>
     <string name="no_record_found">No Record Found</string>
     <string name="invalid_qr_code">Invalid QR Code</string>
+    <string name="does_not_meet_requirement">Does not meet\nrequirements</string>
     <string name="partially_vaccinated">Partially\nvaccinated</string>
     <string name="vaccinated">Fully vaccinated</string>
     <string name="scan_next">Scan next</string>
