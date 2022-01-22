@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/grey">
+    android:background="@color/dark_grey">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,26 +19,54 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <View
+                android:id="@+id/viewRectangleLine"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/medium"
+                android:layout_marginTop="@dimen/xl"
+                android:layout_marginEnd="@dimen/medium"
+                android:layout_marginBottom="@dimen/rect_line_margin_bottom"
+                android:background="@drawable/semi_transparent_solid_rectangle"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_bc_official_result"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txt_status"
                 style="?textAppearanceHeadline1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/invalid_qr_code"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="@dimen/medium"
+                android:layout_marginTop="@dimen/partial_text_result_margin_top"
+                android:layout_marginEnd="@dimen/medium"
+                android:text="@string/does_not_meet_requirement"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.347" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_bc_official_result"
+                style="?textAppearanceBody1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium"
+                android:layout_marginTop="@dimen/medium"
+                android:layout_marginEnd="@dimen/medium"
+                android:text="@string/yukon_official_result"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_status" />
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonScanNext"
                 style="?materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:minWidth="200dp"
-                android:layout_height="wrap_content"
+                android:layout_width="250dp"
+                android:layout_height="52dp"
                 android:layout_marginTop="@dimen/xxl"
                 android:layout_marginBottom="@dimen/medium"
                 android:elevation="2dp"
@@ -47,7 +75,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_status"
+                app:layout_constraintTop_toBottomOf="@+id/viewRectangleLine"
                 tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

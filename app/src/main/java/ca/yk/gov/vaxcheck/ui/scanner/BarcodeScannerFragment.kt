@@ -218,19 +218,10 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
 
     private suspend fun collectImmunizationStatus() {
         viewModel.status.collect { status ->
-            when (status.status) {
-                ImmunizationStatus.FULLY_IMMUNIZED,
-                ImmunizationStatus.PARTIALLY_IMMUNIZED -> {
-                    sharedViewModel.setStatus(status)
-                    findNavController().navigate(
-                        R.id.action_barcodeScannerFragment_to_barcodeScanResultFragment
-                    )
-                }
-
-                ImmunizationStatus.INVALID_QR_CODE -> {
-                    onFailure()
-                }
-            }
+            sharedViewModel.setStatus(status)
+            findNavController().navigate(
+                R.id.action_barcodeScannerFragment_to_barcodeScanResultFragment
+            )
         }
     }
 
