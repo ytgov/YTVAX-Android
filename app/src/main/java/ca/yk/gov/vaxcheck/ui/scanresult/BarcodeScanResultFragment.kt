@@ -131,7 +131,7 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
             stringContext.getString(R.string.scan_next)
 
         sceneNoRecordBinding.txtStatus.text =
-            stringContext.getString(R.string.invalid_qr_code)
+            stringContext.getString(R.string.does_not_meet_requirement)
 
         sceneNoRecordBinding.buttonScanNext
             .setOnClickListener {
