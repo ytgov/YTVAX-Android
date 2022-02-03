@@ -44,7 +44,6 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         stringContext = requireContext().changeLocale(getLocale())
 
         sceneFullyVaccinated = Scene.getSceneForLayout(
@@ -52,13 +51,18 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
             R.layout.scene_fully_vaccinated,
             requireContext()
         )
+
         scenePartiallyVaccinated = Scene.getSceneForLayout(
             binding.sceneRoot,
             R.layout.scene_partially_vaccinated,
             requireContext()
         )
-        sceneNoRecord =
-            Scene.getSceneForLayout(binding.sceneRoot, R.layout.scene_no_record, requireContext())
+
+        sceneNoRecord = Scene.getSceneForLayout(
+            binding.sceneRoot,
+            R.layout.scene_no_record,
+            requireContext()
+        )
 
         sceneNotVaccinated = Scene.getSceneForLayout(
             binding.sceneRoot,
@@ -87,7 +91,12 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
                         setPartialData()
                     }
 
-                    else -> {
+                    VaccinationStatus.NOT_VACCINATED -> {
+                        sceneNotVaccinated.enter()
+                        setNotVaccinatedData()
+                    }
+
+                    VaccinationStatus.INVALID -> {
                         sceneNoRecord.enter()
                         setNoRecordData()
                     }
@@ -138,7 +147,7 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
             stringContext.getString(R.string.scan_next)
 
         sceneNoRecordBinding.txtStatus.text =
-            stringContext.getString(R.string.does_not_meet_requirement)
+            stringContext.getString(R.string.invalid_qr_code)
 
         sceneNoRecordBinding.buttonScanNext
             .setOnClickListener {
@@ -181,7 +190,6 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
 
         sceneNotVaccinatedBinding.txtYkOfficialResult.text =
             stringContext.getString(R.string.yukon_official_result)
-
 
         sceneNotVaccinatedBinding.buttonScanNext
             .setOnClickListener {
