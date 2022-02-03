@@ -9,7 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import ca.bc.gov.shcdecoder.model.ImmunizationStatus
+import ca.bc.gov.shcdecoder.model.VaccinationStatus
+import ca.bc.gov.shcdecoder.model.getPatient
 import ca.yk.gov.vaxcheck.R
 import ca.yk.gov.vaxcheck.databinding.*
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.getLocale
@@ -66,21 +67,27 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
         )
 
         sharedViewModel.status.observe(viewLifecycleOwner, { status ->
-            if (status != null) {
-                binding.txtFullName.text = status.name
+            val (state, shcData) = status
+            if (shcData != null) {
+                val patient = shcData.getPatient()
+
+                binding.txtFullName.text = patient.firstName?.let {
+                    "$it ${patient.lastName.orEmpty()}"
+                } ?: patient.lastName.orEmpty()
+
                 binding.txtAppName.text = stringContext.getString(R.string.y_k_vaccine_card_verifier)
-                when (status.status) {
-                    ImmunizationStatus.FULLY_IMMUNIZED -> {
+                when (state) {
+                    VaccinationStatus.FULLY_VACCINATED -> {
                         sceneFullyVaccinated.enter()
                         setFullyVaccinatedData()
                     }
 
-                    ImmunizationStatus.PARTIALLY_IMMUNIZED -> {
+                    VaccinationStatus.PARTIALLY_VACCINATED -> {
                         scenePartiallyVaccinated.enter()
                         setPartialData()
                     }
 
-                    ImmunizationStatus.INVALID_QR_CODE -> {
+                    else -> {
                         sceneNoRecord.enter()
                         setNoRecordData()
                     }

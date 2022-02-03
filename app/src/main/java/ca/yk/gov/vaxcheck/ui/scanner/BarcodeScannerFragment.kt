@@ -4,8 +4,6 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Size
@@ -29,9 +27,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import ca.bc.gov.shcdecoder.model.ImmunizationStatus
 import ca.yk.gov.vaxcheck.R
-import ca.yk.gov.vaxcheck.SplashActivity
 import ca.yk.gov.vaxcheck.barcodeanalyzer.BarcodeAnalyzer
 import ca.yk.gov.vaxcheck.barcodeanalyzer.ScanningResultListener
 import ca.yk.gov.vaxcheck.databinding.FragmentBarcodeScannerBinding
@@ -51,6 +47,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.core.graphics.drawable.toBitmap
+import ca.bc.gov.shcdecoder.model.VaccinationStatus
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.setLocale
 import ca.yk.gov.vaxcheck.utils.changeLocale
 
@@ -219,9 +216,21 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
     private suspend fun collectImmunizationStatus() {
         viewModel.status.collect { status ->
             sharedViewModel.setStatus(status)
-            findNavController().navigate(
-                R.id.action_barcodeScannerFragment_to_barcodeScanResultFragment
-            )
+            val (state, _) = status
+            when (state) {
+                VaccinationStatus.FULLY_VACCINATED,
+                VaccinationStatus.PARTIALLY_VACCINATED,
+                VaccinationStatus.NOT_VACCINATED -> {
+                    sharedViewModel.setStatus(status)
+                    findNavController().navigate(
+                        R.id.action_barcodeScannerFragment_to_barcodeScanResultFragment
+                    )
+                }
+
+                VaccinationStatus.INVALID -> {
+                    onFailure()
+                }
+            }
         }
     }
 
