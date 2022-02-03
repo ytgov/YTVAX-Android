@@ -221,7 +221,6 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
                 VaccinationStatus.FULLY_VACCINATED,
                 VaccinationStatus.PARTIALLY_VACCINATED,
                 VaccinationStatus.NOT_VACCINATED -> {
-                    sharedViewModel.setStatus(status)
                     findNavController().navigate(
                         R.id.action_barcodeScannerFragment_to_barcodeScanResultFragment
                     )
