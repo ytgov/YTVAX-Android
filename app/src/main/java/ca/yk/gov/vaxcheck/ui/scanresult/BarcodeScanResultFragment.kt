@@ -9,7 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import ca.bc.gov.shcdecoder.model.ImmunizationStatus
+import ca.bc.gov.shcdecoder.model.VaccinationStatus
+import ca.bc.gov.shcdecoder.model.getPatient
 import ca.yk.gov.vaxcheck.R
 import ca.yk.gov.vaxcheck.databinding.*
 import ca.yk.gov.vaxcheck.utils.LanguageConstants.getLocale
@@ -43,7 +44,6 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         stringContext = requireContext().changeLocale(getLocale())
 
         sceneFullyVaccinated = Scene.getSceneForLayout(
@@ -51,13 +51,18 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
             R.layout.scene_fully_vaccinated,
             requireContext()
         )
+
         scenePartiallyVaccinated = Scene.getSceneForLayout(
             binding.sceneRoot,
             R.layout.scene_partially_vaccinated,
             requireContext()
         )
-        sceneNoRecord =
-            Scene.getSceneForLayout(binding.sceneRoot, R.layout.scene_no_record, requireContext())
+
+        sceneNoRecord = Scene.getSceneForLayout(
+            binding.sceneRoot,
+            R.layout.scene_no_record,
+            requireContext()
+        )
 
         sceneNotVaccinated = Scene.getSceneForLayout(
             binding.sceneRoot,
@@ -66,21 +71,32 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
         )
 
         sharedViewModel.status.observe(viewLifecycleOwner, { status ->
-            if (status != null) {
-                binding.txtFullName.text = status.name
+            val (state, shcData) = status
+            if (shcData != null) {
+                val patient = shcData.getPatient()
+
+                binding.txtFullName.text = patient.firstName?.let {
+                    "$it ${patient.lastName.orEmpty()}"
+                } ?: patient.lastName.orEmpty()
+
                 binding.txtAppName.text = stringContext.getString(R.string.y_k_vaccine_card_verifier)
-                when (status.status) {
-                    ImmunizationStatus.FULLY_IMMUNIZED -> {
+                when (state) {
+                    VaccinationStatus.FULLY_VACCINATED -> {
                         sceneFullyVaccinated.enter()
                         setFullyVaccinatedData()
                     }
 
-                    ImmunizationStatus.PARTIALLY_IMMUNIZED -> {
+                    VaccinationStatus.PARTIALLY_VACCINATED -> {
                         scenePartiallyVaccinated.enter()
                         setPartialData()
                     }
 
-                    ImmunizationStatus.INVALID_QR_CODE -> {
+                    VaccinationStatus.NOT_VACCINATED -> {
+                        sceneNotVaccinated.enter()
+                        setNotVaccinatedData()
+                    }
+
+                    VaccinationStatus.INVALID -> {
                         sceneNoRecord.enter()
                         setNoRecordData()
                     }
@@ -131,7 +147,7 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
             stringContext.getString(R.string.scan_next)
 
         sceneNoRecordBinding.txtStatus.text =
-            stringContext.getString(R.string.does_not_meet_requirement)
+            stringContext.getString(R.string.invalid_qr_code)
 
         sceneNoRecordBinding.buttonScanNext
             .setOnClickListener {
@@ -174,7 +190,6 @@ class BarcodeScanResultFragment : Fragment(R.layout.fragment_barcode_scan_result
 
         sceneNotVaccinatedBinding.txtYkOfficialResult.text =
             stringContext.getString(R.string.yukon_official_result)
-
 
         sceneNotVaccinatedBinding.buttonScanNext
             .setOnClickListener {

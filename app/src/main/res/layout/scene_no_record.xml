@@ -28,7 +28,7 @@
                 android:layout_marginEnd="@dimen/medium"
                 android:layout_marginBottom="@dimen/rect_line_margin_bottom"
                 android:background="@drawable/semi_transparent_solid_rectangle"
-                app:layout_constraintBottom_toBottomOf="@+id/txt_bc_official_result"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_yk_official_result"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -41,14 +41,14 @@
                 android:layout_marginStart="@dimen/medium"
                 android:layout_marginTop="@dimen/partial_text_result_margin_top"
                 android:layout_marginEnd="@dimen/medium"
-                android:text="@string/does_not_meet_requirement"
+                android:text="@string/invalid_qr_code"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txt_bc_official_result"
+                android:id="@+id/txt_yk_official_result"
                 style="?textAppearanceBody1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
