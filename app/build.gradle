@@ -14,8 +14,8 @@ android {
         applicationId "ca.yk.gov.vaxcheck"
         minSdk 27
         targetSdk 31
-        versionCode 7
-        versionName "1.2.0"
+        versionCode 8
+        versionName "1.3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -32,8 +32,8 @@ android {
         dev {
             dimension "version"
             versionNameSuffix "-dev"
-            resValue "string", "issuer_url", "https://phsasmarthealthcard-dev.azurewebsites.net/v1/trusted/.well-known/issuers.json"
-            resValue "string", "rules_url", "https://ds9mwekyyprcy.cloudfront.net/rules.json"
+            resValue "string", "issuer_url", "https://pvc.service.yukon.ca/test/v1/verifier/.well-known/issuers.json"
+            resValue "string", "rules_url", "https://ds9mwekyyprcy.cloudfront.net/yk-rules.json"
             resValue "string", "default_issuer_json", "phsasmarthealthcard-dev.azurewebsites.net~v1~trusted~.well-known~issuers.json"
             resValue "string", "default_rules_json", "ds9mwekyyprcy.cloudfront.net~rules.json"
             resValue "string", "deferrals_domain", "pvc.service.yukon.ca"
