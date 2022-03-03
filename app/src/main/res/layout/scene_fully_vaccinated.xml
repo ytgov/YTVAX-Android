@@ -29,7 +29,7 @@
                 android:layout_marginEnd="@dimen/medium"
                 android:layout_marginBottom="@dimen/rect_line_margin_bottom"
                 android:background="@drawable/solid_rectangle"
-                app:layout_constraintBottom_toBottomOf="@+id/txt_bc_official_result"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_yk_official_result"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,16 +37,19 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txt_status"
                 style="?textAppearanceHeadline1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium"
-                android:text="@string/vaccinated"
+                android:layout_marginStart="@dimen/large"
+                android:layout_marginEnd="@dimen/large"
+                android:text="@string/meets_requirement"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img_right_tick" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txt_bc_official_result"
+                android:id="@+id/txt_yk_official_result"
                 style="?textAppearanceBody1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,8 +73,9 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonScanNext"
                 style="?materialButtonOutlinedStyle"
-                android:layout_width="200dp"
-                android:layout_height="52dp"
+                android:layout_width="wrap_content"
+                android:minWidth="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/xxl"
                 android:layout_marginBottom="@dimen/medium"
                 android:elevation="2dp"

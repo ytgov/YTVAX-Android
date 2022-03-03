@@ -16,6 +16,22 @@
         <item name="strokeColor">@color/dark_blue</item>
     </style>
 
+
+    <style name="YK_VAX.Widget.MaterialComponents.Radio.OutlinedRadio" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
+        <item name="android:textSize">15sp</item>
+        <item name="fontFamily">@font/yk_montserrat_regular</item>
+        <item name="android:paddingStart">@dimen/large</item>
+        <item name="android:paddingEnd">@dimen/large</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/radio_button_border</item>
+        <item name="android:button">@null</item>
+        <item name="drawableRightCompat">@drawable/selector_custom_radio_buttons</item>
+        <item name="android:drawablePadding">@dimen/medium</item>
+        <item name="android:minWidth">200dp</item>
+    </style>
+
+
+
     <style name="YK_VAX.Widget.MaterialComponents.Button.TextButton.Icon" parent="Widget.MaterialComponents.Button.TextButton.Icon">
         <item name="android:paddingStart">@dimen/xl</item>
         <item name="android:paddingEnd">@dimen/xl</item>
@@ -23,7 +39,7 @@
         <item name="android:paddingTop">11dp</item>
         <item name="android:paddingBottom">11dp</item>
         <item name="android:textColor">@color/white</item>
-        <item name="backgroundTint">@color/sky_blue</item>
+        <item name="backgroundTint">@color/dark_blue</item>
         <item name="fontFamily">@font/yk_montserrat_regular</item>
         <item name="android:lineSpacingMultiplier">0.1</item>
     </style>

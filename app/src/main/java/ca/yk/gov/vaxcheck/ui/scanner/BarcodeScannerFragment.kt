@@ -10,6 +10,8 @@ import android.util.Size
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -25,11 +27,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import ca.bc.gov.shcdecoder.model.ImmunizationStatus
 import ca.yk.gov.vaxcheck.R
 import ca.yk.gov.vaxcheck.barcodeanalyzer.BarcodeAnalyzer
 import ca.yk.gov.vaxcheck.barcodeanalyzer.ScanningResultListener
 import ca.yk.gov.vaxcheck.databinding.FragmentBarcodeScannerBinding
+import ca.yk.gov.vaxcheck.utils.LanguageConstants.LANGUAGE_CODE_EN
+import ca.yk.gov.vaxcheck.utils.LanguageConstants.LANGUAGE_CODE_FR
+import ca.yk.gov.vaxcheck.utils.LanguageConstants.getLocale
 import ca.yk.gov.vaxcheck.utils.setSpannableLink
 import ca.yk.gov.vaxcheck.utils.toast
 import ca.yk.gov.vaxcheck.utils.viewBindings
@@ -37,10 +41,16 @@ import ca.yk.gov.vaxcheck.viewmodel.BarcodeScanResultViewModel
 import ca.yk.gov.vaxcheck.viewmodel.SharedViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+import androidx.browser.customtabs.CustomTabColorSchemeParams
+import androidx.core.graphics.drawable.toBitmap
+import ca.bc.gov.shcdecoder.model.VaccinationStatus
+import ca.yk.gov.vaxcheck.utils.LanguageConstants.setLocale
+import ca.yk.gov.vaxcheck.utils.changeLocale
+
 
 /**
  * [BarcodeScannerFragment]
@@ -66,6 +76,9 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
 
     private val viewModel: BarcodeScanResultViewModel by viewModels()
 
+    private lateinit var stringContext: Context
+
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         requestPermission = registerForActivityResult(
@@ -82,13 +95,14 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        stringContext = requireContext().changeLocale(getLocale())
 
         viewLifecycleOwner.lifecycleScope.launch {
 
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
 
                 launch {
-                    collectOnBoardingFlow()
+                    collectSelectedLanguageFlow()
                 }
                 launch {
                     collectImmunizationStatus()
@@ -96,19 +110,64 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
             }
         }
 
-        binding.txtPrivacyPolicy.setSpannableLink {
-            showPrivacyPolicy()
+        setStrings()
+        binding.swLocale.isChecked = getLocale() == LANGUAGE_CODE_FR
+        binding.swLocale.setOnCheckedChangeListener { _, isChecked ->
+
+            if (!isChecked) {
+                setLocale(LANGUAGE_CODE_EN)
+                sharedViewModel.setSelectLanguage(LANGUAGE_CODE_EN)
+            } else {
+                setLocale(LANGUAGE_CODE_FR)
+                sharedViewModel.setSelectLanguage(LANGUAGE_CODE_FR)
+            }
+
+            stringContext = requireContext().changeLocale(getLocale())
+            setStrings()
         }
+
     }
 
-    private fun showPrivacyPolicy() {
-        val webpage: Uri = Uri.parse(getString(R.string.url_privacy_policy))
+    private fun showPrivacyPolicy(url: String) {
+        val webpage: Uri = Uri.parse(url)
         val intent = Intent(Intent.ACTION_VIEW, webpage)
         try {
             startActivity(intent)
         } catch (e: Exception) {
-            context?.toast(getString(R.string.no_app_found))
+            context?.toast(stringContext.getString(R.string.no_app_found))
         }
+    }
+
+    private fun setStrings() {
+
+        binding.txtCovidInfo.text = stringContext.getString(R.string.btn_covid_info)
+        binding.txtPrivacyPolicy.text = stringContext.getString(R.string.btn_data_collection_notice)
+
+        binding.txtCovidInfo.setSpannableLink {
+            showCovidInfo(stringContext.getString(R.string.url_covid_info))
+        }
+
+        binding.txtPrivacyPolicy.setSpannableLink {
+            showPrivacyPolicy(
+                stringContext.getString(R.string.url_privacy_policy)
+            )
+        }
+    }
+
+    private fun showCovidInfo(url: String) {
+        val colorInt = ContextCompat.getColor(requireContext(), R.color.dark_blue)
+        val defaultColors = CustomTabColorSchemeParams.Builder()
+            .setToolbarColor(colorInt)
+            .build()
+
+        val builder = CustomTabsIntent.Builder()
+        builder.setDefaultColorSchemeParams(defaultColors)
+        AppCompatResources.getDrawable(requireActivity(), R.drawable.ic_arrow_back)?.let {
+            builder.setCloseButtonIcon(it.toBitmap())
+        }
+
+        val customTabsIntent = builder.build()
+        customTabsIntent.launchUrl(requireContext(), Uri.parse(url))
     }
 
     private suspend fun collectOnBoardingFlow() {
@@ -135,18 +194,39 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
         }
     }
 
+    private suspend fun collectSelectedLanguageFlow() {
+        sharedViewModel.getSelectedLanguage.collect { code ->
+            when (code) {
+                LANGUAGE_CODE_EN,
+                LANGUAGE_CODE_FR -> {
+                    collectOnBoardingFlow()
+                }
+                else -> {
+                    val startDestination = findNavController().graph.startDestination
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(startDestination, true)
+                        .build()
+                    findNavController().navigate(R.id.selectLanguageFragment, null, navOptions)
+                }
+
+            }
+        }
+    }
+
     private suspend fun collectImmunizationStatus() {
         viewModel.status.collect { status ->
-            when (status.status) {
-                ImmunizationStatus.FULLY_IMMUNIZED,
-                ImmunizationStatus.PARTIALLY_IMMUNIZED -> {
-                    sharedViewModel.setStatus(status)
+            sharedViewModel.setStatus(status)
+            val (state, _) = status
+            when (state) {
+                VaccinationStatus.FULLY_VACCINATED,
+                VaccinationStatus.PARTIALLY_VACCINATED,
+                VaccinationStatus.NOT_VACCINATED -> {
                     findNavController().navigate(
                         R.id.action_barcodeScannerFragment_to_barcodeScanResultFragment
                     )
                 }
 
-                ImmunizationStatus.INVALID_QR_CODE -> {
+                VaccinationStatus.INVALID -> {
                     onFailure()
                 }
             }
@@ -188,10 +268,10 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
 
     private fun showRationalDialog() {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.yk_permission_required_title))
+            .setTitle(stringContext.getString(R.string.yk_permission_required_title))
             .setCancelable(false)
-            .setMessage(getString(R.string.yk_permission_message))
-            .setNegativeButton(getString(R.string.exit)) { dialog, which ->
+            .setMessage(stringContext.getString(R.string.yk_permission_message))
+            .setNegativeButton(stringContext.getString(R.string.exit)) { dialog, which ->
                 if (!findNavController().popBackStack() || !findNavController().navigateUp()) {
                     requireActivity().finish()
                 }
@@ -212,111 +292,111 @@ class BarcodeScannerFragment : Fragment(R.layout.fragment_barcode_scanner), Scan
 
             enableFlashControl()
         }, ContextCompat.getMainExecutor(requireContext()))
-        }
+    }
 
-        private fun bindBarcodeScannerUseCase() {
+    private fun bindBarcodeScannerUseCase() {
 
-            val cameraSelector = CameraSelector.Builder()
-                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+        val cameraSelector = CameraSelector.Builder()
+            .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+            .build()
+
+        val hasCamera = cameraProvider.hasCamera(cameraSelector)
+
+        if (hasCamera) {
+
+            val resolution = Size(
+                binding.scannerPreview.width,
+                binding.scannerPreview.height
+            )
+            val preview = Preview.Builder()
+                .apply {
+                    setTargetResolution(resolution)
+                }.build()
+
+            imageAnalysis = ImageAnalysis.Builder()
+                .setTargetResolution(resolution)
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
 
-            val hasCamera = cameraProvider.hasCamera(cameraSelector)
+            imageAnalysis.setAnalyzer(cameraExecutor, BarcodeAnalyzer(this))
 
-            if (hasCamera) {
+            cameraProvider.unbindAll()
 
-                val resolution = Size(
-                    binding.scannerPreview.width,
-                    binding.scannerPreview.height
-                )
-                val preview = Preview.Builder()
-                    .apply {
-                        setTargetResolution(resolution)
-                    }.build()
+            camera = cameraProvider.bindToLifecycle(
+                viewLifecycleOwner, cameraSelector, preview, imageAnalysis
+            )
 
-                imageAnalysis = ImageAnalysis.Builder()
-                    .setTargetResolution(resolution)
-                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                    .build()
-
-                imageAnalysis.setAnalyzer(cameraExecutor, BarcodeAnalyzer(this))
-
-                cameraProvider.unbindAll()
-
-                camera = cameraProvider.bindToLifecycle(
-                    viewLifecycleOwner, cameraSelector, preview, imageAnalysis
-                )
-
-                preview.setSurfaceProvider(binding.scannerPreview.surfaceProvider)
-            } else {
-                showNoCameraAlertDialog()
-            }
-        }
-
-        private fun showNoCameraAlertDialog() {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(getString(R.string.yk_no_rear_camera_title))
-                .setCancelable(false)
-                .setMessage(getString(R.string.yk_nor_rear_camera_message))
-                .setNegativeButton(getString(R.string.exit)) { dialog, which ->
-                    if (!findNavController().popBackStack() || !findNavController().navigateUp()) {
-                        requireActivity().finish()
-                    }
-                    dialog.dismiss()
-                }
-                .show()
-        }
-
-        private fun enableFlashControl() {
-            if (camera.cameraInfo.hasFlashUnit()) {
-                binding.checkboxFlashLight.visibility = View.VISIBLE
-
-                binding.checkboxFlashLight.setOnCheckedChangeListener { buttonView, isChecked ->
-
-                    if (buttonView.isPressed) {
-                        camera.cameraControl.enableTorch(isChecked)
-                    }
-                }
-
-                camera.cameraInfo.torchState.observe(viewLifecycleOwner) {
-                    it?.let { torchState ->
-                        binding.checkboxFlashLight.isChecked = torchState == TorchState.ON
-                    }
-                }
-            }
-        }
-
-        override fun onScanned(shcUri: String) {
-
-            // Since camera is constantly analysing
-            // Its good to clear analyzer to avoid duplicate dialogs
-            // When barcode is not supported
-            imageAnalysis.clearAnalyzer()
-
-            viewModel.processShcUri(shcUri)
-        }
-
-        override fun onFailure() {
-
-            // Since camera is constantly analysing
-            // Its good to clear analyzer to avoid duplicate dialogs
-            // When barcode is not supported
-            imageAnalysis.clearAnalyzer()
-
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(getString(R.string.yk_invalid_barcode_title))
-                .setCancelable(false)
-                .setMessage(getString(R.string.yk_invalid_barcode_message))
-                .setPositiveButton(getString(R.string.text_ok)) { dialog, which ->
-
-                    // Attach analyzer again to start analysis.
-                    imageAnalysis.setAnalyzer(cameraExecutor, BarcodeAnalyzer(this))
-
-                    dialog.dismiss()
-                }
-                .show()
-        }
-
-        companion object {
-            const val ON_BOARDING_SHOWN = "ON_BOARDING_SHOWN"
+            preview.setSurfaceProvider(binding.scannerPreview.surfaceProvider)
+        } else {
+            showNoCameraAlertDialog()
         }
     }
+
+    private fun showNoCameraAlertDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(stringContext.getString(R.string.yk_no_rear_camera_title))
+            .setCancelable(false)
+            .setMessage(stringContext.getString(R.string.yk_nor_rear_camera_message))
+            .setNegativeButton(stringContext.getString(R.string.exit)) { dialog, which ->
+                if (!findNavController().popBackStack() || !findNavController().navigateUp()) {
+                    requireActivity().finish()
+                }
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun enableFlashControl() {
+        if (camera.cameraInfo.hasFlashUnit()) {
+            binding.checkboxFlashLight.visibility = View.VISIBLE
+
+            binding.checkboxFlashLight.setOnCheckedChangeListener { buttonView, isChecked ->
+
+                if (buttonView.isPressed) {
+                    camera.cameraControl.enableTorch(isChecked)
+                }
+            }
+
+            camera.cameraInfo.torchState.observe(viewLifecycleOwner) {
+                it?.let { torchState ->
+                    binding.checkboxFlashLight.isChecked = torchState == TorchState.ON
+                }
+            }
+        }
+    }
+
+    override fun onScanned(shcUri: String) {
+
+        // Since camera is constantly analysing
+        // Its good to clear analyzer to avoid duplicate dialogs
+        // When barcode is not supported
+        imageAnalysis.clearAnalyzer()
+
+        viewModel.processShcUri(shcUri)
+    }
+
+    override fun onFailure() {
+
+        // Since camera is constantly analysing
+        // Its good to clear analyzer to avoid duplicate dialogs
+        // When barcode is not supported
+        imageAnalysis.clearAnalyzer()
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(stringContext.getString(R.string.yk_invalid_barcode_title))
+            .setCancelable(false)
+            .setMessage(stringContext.getString(R.string.yk_invalid_barcode_message))
+            .setPositiveButton(stringContext.getString(R.string.text_ok)) { dialog, which ->
+
+                // Attach analyzer again to start analysis.
+                imageAnalysis.setAnalyzer(cameraExecutor, BarcodeAnalyzer(this))
+
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    companion object {
+        const val ON_BOARDING_SHOWN = "ON_BOARDING_SHOWN"
+    }
+}

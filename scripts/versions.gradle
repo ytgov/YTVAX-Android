@@ -35,7 +35,9 @@ versions.gson = "2.8.8"
 versions.jjwt = "0.11.1"
 versions.bouncycastle = "1.69"
 
-versions.shcdecoder = "1.0.8"
+versions.shcdecoder = "1.2.4"
+
+versions.chrome_tabs = "1.4.0"
 
 versions.junit = "4.13.2"
 versions.ext_junit = "1.1.3"
